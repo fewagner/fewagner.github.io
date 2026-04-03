@@ -15,7 +15,7 @@ html {
 }
 
 body {
-  font-family: 'Nunito Sans', 'Avenir', 'Segoe UI', system-ui, sans-serif;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
   color: #555;
   background: #fff;
   line-height: 1.7;
@@ -62,7 +62,7 @@ nav .container {
 .nav-brand {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #333;
+  color: #555;
   letter-spacing: 0.02em;
 }
 
@@ -157,7 +157,7 @@ nav .container {
 .page-header h1 {
   font-size: 2rem;
   font-weight: 700;
-  color: #333;
+  color: #555;
 }
 
 /* --- Main Content ----------------------------------------- */
@@ -177,7 +177,7 @@ main {
 .hero-text h1 {
   font-size: 2.4rem;
   font-weight: 700;
-  color: #333;
+  color: #555;
   line-height: 1.25;
   margin-bottom: 0.4rem;
 }
@@ -213,7 +213,7 @@ section {
 section h2 {
   font-size: 1.4rem;
   font-weight: 700;
-  color: #333;
+  color: #555;
   margin-bottom: 1rem;
   padding-bottom: 0.4rem;
   border-bottom: 2px solid #e8e8e8;
@@ -222,7 +222,7 @@ section h2 {
 section h3 {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #444;
+  color: #555;
   margin: 1.5rem 0 0.5rem;
 }
 
@@ -310,7 +310,7 @@ section li {
 
 .pub-entry .pub-title {
   font-weight: 700;
-  color: #333;
+  color: #555;
   font-size: 0.975rem;
   margin-bottom: 0.2rem;
 }
@@ -349,7 +349,7 @@ section li {
 }
 
 .talk-details strong {
-  color: #333;
+  color: #555;
   font-weight: 600;
 }
 
@@ -372,7 +372,7 @@ section li {
 .cv-section h2 {
   font-size: 1.2rem;
   font-weight: 700;
-  color: #333;
+  color: #555;
   border-bottom: 2px solid #e8e8e8;
   padding-bottom: 0.3rem;
   margin-bottom: 1rem;
@@ -393,7 +393,7 @@ section li {
 
 .cv-body .cv-title {
   font-weight: 700;
-  color: #333;
+  color: #555;
   font-size: 0.975rem;
 }
 
