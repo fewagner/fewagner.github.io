@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home | Felix Wagner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a class="nav-brand" href="index.html">Felix Wagner</a>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li class="has-dropdown">
+        <a href="#">Projects ▾</a>
+        <ul class="dropdown-menu">
+          <li><a href="projects/ml4cpd.html">ML4CPD</a></li>
+          <li><a href="projects/excess.html">EXCESS</a></li>
+          <li><a href="projects/spin-dependent-dm.html">Spin-dependent dark matter</a></li>
+        </ul>
+      </li>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="talks.html">Talks</a></li>
+      <li><a href="teaching.html">Teaching</a></li>
+      <li><a href="cv.html">CV</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="hero">
+      <div class="hero-text">
+        <h1>Felix Wagner</h1>
+        <p class="subtitle">PostDoc, Superconducting Quantum Bits and Sensors</p>
+
+        <p>
+          Universal quantum computing will accelerate many computational tasks and create new opportunities,
+          and superconducting circuits are one of the prime platforms for its realization. In these devices,
+          a quantum state is captured in the field of a micrometer-scale on-chip SQUID-capacitor loop. The
+          state must be protected from spurious interactions: quasiparticles and defects, photon backgrounds,
+          and others. Together with the team of the Quantum Computing Hub of ETH Zurich and the Paul Scherrer
+          Institute, we study the origin, dynamics, and mitigation strategies of these error sources.
+        </p>
+
+        <p>
+          Previously I did my PhD at the Institute for High Energy Physics of the Austrian Academy of Sciences,
+          where I worked on the direct detection of dark matter, the mysterious substance that makes up 85% of
+          all matter in our universe and whose nature we still do not understand. Low-temperature dark matter
+          detectors and superconducting circuits share common challenges in their microphysics, backgrounds,
+          control, and fabrication, creating an opportunity to simultaneously advance several of the biggest
+          open questions in modern physics.
+        </p>
+
+        <p>
+          Read more about my <a href="research.html">research</a> and specific
+          <a href="projects/ml4cpd.html">projects</a>, or browse through my
+          <a href="publications.html">publications</a>.
+        </p>
+      </div>
+      <div class="hero-portrait">
+        <img src="images/portrait.avif" alt="Felix Wagner">
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <span>
+      <a href="mailto:felix.wagner@phys.ethz.ch">felix.wagner@phys.ethz.ch</a>
+      &nbsp;·&nbsp;
+      Quantum Device Lab, ETH Zürich
+      &nbsp;·&nbsp;
+      ETHZ-PSI Quantum Computing Hub
+    </span>
+    <span>Last updated: 02/24</span>
+  </div>
+</footer>
+
+<script>
+  function toggleNav() {
+    document.getElementById('nav-links').classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Publications | Felix Wagner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a class="nav-brand" href="index.html">Felix Wagner</a>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li class="has-dropdown">
+        <a href="#">Projects ▾</a>
+        <ul class="dropdown-menu">
+          <li><a href="projects/ml4cpd.html">ML4CPD</a></li>
+          <li><a href="projects/excess.html">EXCESS</a></li>
+          <li><a href="projects/spin-dependent-dm.html">Spin-dependent dark matter</a></li>
+        </ul>
+      </li>
+      <li><a href="publications.html" class="active">Publications</a></li>
+      <li><a href="talks.html">Talks</a></li>
+      <li><a href="teaching.html">Teaching</a></li>
+      <li><a href="cv.html">CV</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="page-header">
+      <h1>Publications</h1>
+    </div>
+
+    <p>
+      I am only listing papers in which I either invested significant time and made a significant
+      contribution, or which I co-authored but find especially noteworthy for other reasons.
+    </p>
+
+    <p style="margin-top: 0.8rem;">
+      Find a full list of my publications on ORCID:
+      <a href="https://orcid.org/0000-0001-5687-6392" target="_blank">0000-0001-5687-6392</a>
+    </p>
+
+    <section style="margin-top: 2.5rem;">
+      <div class="pub-entry">
+        <div class="pub-title">Low-Energy Backgrounds in Solid-State Phonon and Charge Detectors.</div>
+        <div class="pub-authors">
+          Daniel Baxter, Rouven Essig, Yonit Hochberg, Margarita Kaznacheeva, Belina von Krosigk,
+          Florian Reindl, Roger K. Romani and Felix Wagner
+        </div>
+        <div class="pub-journal">Annual Review of Nuclear and Particle Science Vol. 75 (2025).</div>
+      </div>
+
+      <div class="pub-entry">
+        <div class="pub-title">Optimal operation of cryogenic calorimeters through deep reinforcement learning.</div>
+        <div class="pub-authors">The CRESST collaboration (corresponding author: F. Wagner)</div>
+        <div class="pub-journal">Comput Softw Big Sci. Volume 8, article number 10 (2024).</div>
+      </div>
+
+      <div class="pub-entry">
+        <div class="pub-title">Towards an automated data cleaning with deep learning in CRESST.</div>
+        <div class="pub-authors">The CRESST collaboration (corresponding author: F. Wagner)</div>
+        <div class="pub-journal">Eur. Phys. J. Plus 138, 100 (2023).</div>
+      </div>
+
+      <div class="pub-entry">
+        <div class="pub-title">Cait: analysis toolkit for cryogenic particle detectors in Python.</div>
+        <div class="pub-authors">F. Wagner et al.</div>
+        <div class="pub-journal">Comput Softw Big Sci 6, 19 (2022).</div>
+      </div>
+
+      <div class="pub-entry">
+        <div class="pub-title">Testing spin-dependent dark matter interactions with lithium targets in CRESST-III.</div>
+        <div class="pub-authors">
+          The CRESST collaboration (corresponding authors: A. Bertolini, S. Gupta, F. Wagner)
+        </div>
+        <div class="pub-journal">Phys. Rev. D 106, 092008 (2022).</div>
+      </div>
+
+      <div class="pub-entry">
+        <div class="pub-title">EXCESS workshop: Descriptions of rising low energy spectra.</div>
+        <div class="pub-authors">A. Fuss, M. Kaznacheeva, F. Reindl, F. Wagner (editors)</div>
+        <div class="pub-journal">SciPost Phys. Proc. 9, 001 (2022).</div>
+      </div>
+
+      <div class="pub-entry">
+        <div class="pub-title">Nonlinear pile-up separation with LSTM neural networks.</div>
+        <div class="pub-authors">F. Wagner</div>
+        <div class="pub-journal">
+          arXiv:2112.06792. Contribution to the Fourth Workshop on Machine Learning and the Physical
+          Sciences (NeurIPS 2021).
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <span>
+      <a href="mailto:felix.wagner@phys.ethz.ch">felix.wagner@phys.ethz.ch</a>
+      &nbsp;·&nbsp;
+      Quantum Device Lab, ETH Zürich
+      &nbsp;·&nbsp;
+      ETHZ-PSI Quantum Computing Hub
+    </span>
+    <span>Last updated: 02/24</span>
+  </div>
+</footer>
+
+<script>
+  function toggleNav() {
+    document.getElementById('nav-links').classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>

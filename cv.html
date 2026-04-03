@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CV | Felix Wagner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a class="nav-brand" href="index.html">Felix Wagner</a>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li class="has-dropdown">
+        <a href="#">Projects ▾</a>
+        <ul class="dropdown-menu">
+          <li><a href="projects/ml4cpd.html">ML4CPD</a></li>
+          <li><a href="projects/excess.html">EXCESS</a></li>
+          <li><a href="projects/spin-dependent-dm.html">Spin-dependent dark matter</a></li>
+        </ul>
+      </li>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="talks.html">Talks</a></li>
+      <li><a href="teaching.html">Teaching</a></li>
+      <li><a href="cv.html" class="active">CV</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="page-header">
+      <h1>Curriculum Vitae</h1>
+    </div>
+
+    <div class="cv-section">
+      <h2>Research Experience</h2>
+
+      <div class="cv-entry">
+        <div class="cv-dates">2024 – present</div>
+        <div class="cv-body">
+          <div class="cv-title">Postdoctoral Researcher</div>
+          <div class="cv-place">ETH Zürich, Zurich</div>
+          <div class="cv-desc">
+            Quantum computing with superconducting qubits. Supervised by Andreas Wallraff.
+          </div>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-dates">2020 – 2023</div>
+        <div class="cv-body">
+          <div class="cv-title">Doctoral Researcher</div>
+          <div class="cv-place">Institute of High Energy Physics, Austrian Academy of Sciences, Vienna</div>
+          <div class="cv-desc">
+            Dark matter direct detection with the CRESST and COSINUS experiments.
+            Supervised by Jochen Schieck, Florian Reindl and Wolfgang Waltenberger.
+          </div>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-dates">2021 – 2023</div>
+        <div class="cv-body">
+          <div class="cv-title">Student Researcher</div>
+          <div class="cv-place">Technical University Vienna</div>
+          <div class="cv-desc">
+            Reinforcement learning for the control of particle physics experiments (master thesis in
+            mathematics). Supervised by Clemens Heitzinger.
+          </div>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-dates">2019 – 2020</div>
+        <div class="cv-body">
+          <div class="cv-title">Student Researcher</div>
+          <div class="cv-place">Institute of High Energy Physics, Austrian Academy of Sciences, Vienna</div>
+          <div class="cv-desc">
+            Machine learning methods for the analysis of cryogenic dark matter detectors (master thesis
+            in physics). Supervised by Jochen Schieck, Florian Reindl and Wolfgang Waltenberger.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cv-section">
+      <h2>Education</h2>
+
+      <div class="cv-entry">
+        <div class="cv-dates">2020 – 2023</div>
+        <div class="cv-body">
+          <div class="cv-title">Doctoral programme, Technical Physics</div>
+          <div class="cv-place">Technical University Vienna, AUT</div>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-dates">2018 – 2023</div>
+        <div class="cv-body">
+          <div class="cv-title">Master of Science, Technical Mathematics</div>
+          <div class="cv-place">Technical University Vienna, AUT</div>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-dates">2018 – 2020</div>
+        <div class="cv-body">
+          <div class="cv-title">Master of Science, Technical Physics</div>
+          <div class="cv-place">Technical University Vienna, AUT</div>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-dates">2015 – 2018</div>
+        <div class="cv-body">
+          <div class="cv-title">Bachelor of Science, Technical Physics</div>
+          <div class="cv-place">Technical University Vienna, AUT</div>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-dates">Sep 2022</div>
+        <div class="cv-body">
+          <div class="cv-title">CERN School of Computing</div>
+          <div class="cv-place">Kraków, PL</div>
+          <div class="cv-desc">Computing methods for large scale particle physics experiments.</div>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-dates">Jul – Aug 2017</div>
+        <div class="cv-body">
+          <div class="cv-title">Chinese Language Summerschool</div>
+          <div class="cv-place">Peking University, Beijing, CHN</div>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-dates">Jun 2013</div>
+        <div class="cv-body">
+          <div class="cv-title">BHS Matura</div>
+          <div class="cv-place">Higher Technical College for Biomedical Engineering, Mistelbach/Zaya, AUT</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cv-section">
+      <h2>Awards and Fellowships</h2>
+
+      <div class="cv-entry">
+        <div class="cv-dates">2025</div>
+        <div class="cv-body">
+          <div class="cv-title">Victor-Franz-Hess Dissertation Prize</div>
+          <div class="cv-desc">
+            Prize awarded to outstanding dissertations in the field of nuclear and particle physics
+            by the Austrian Academy of Sciences.
+          </div>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-dates"></div>
+        <div class="cv-body">
+          <div class="cv-title">Schrödinger Fellowship</div>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-dates"></div>
+        <div class="cv-body">
+          <div class="cv-title">FFG Scholarship</div>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-dates"></div>
+        <div class="cv-body">
+          <div class="cv-title">Club Alpbach Lower Austria Scholarship</div>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-dates">2019</div>
+        <div class="cv-body">
+          <div class="cv-title">ÖAW AI Summer School Challenge</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cv-section">
+      <h2>Publications, Talks, and Teaching</h2>
+      <p>
+        See the dedicated pages for
+        <a href="publications.html">publications</a>,
+        <a href="talks.html">talks</a>, and
+        <a href="teaching.html">teaching</a>.
+      </p>
+    </div>
+
+    <div class="cv-section">
+      <h2>Service and Outreach</h2>
+      <ul>
+        <li>EXCESS workshops</li>
+        <li>ÖAW AI school</li>
+        <li>Dark Matter Day, 2022</li>
+        <li>
+          Social Artificial Intelligence Night (SAINT22), University of Applied Science St. Pölten —
+          public talk about the research done in the Machine Learning and Uncertainty Quantification
+          Group (Heitzinger group, TU Vienna).
+        </li>
+      </ul>
+    </div>
+
+    <div class="cv-section">
+      <h2>Non-Scientific Engagement</h2>
+
+      <div class="cv-entry">
+        <div class="cv-dates">Jul – Aug 2016</div>
+        <div class="cv-body">
+          <div class="cv-title">Internship at the Austrian Embassy Beijing</div>
+          <div class="cv-desc">
+            Administrative internship at the Austrian Embassy in Beijing, China. Accompanying meetings
+            of the ambassador, research for a publication about economic strategies in cooperation with
+            the Office of Science and Technology Austria Beijing.
+          </div>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-dates">2012 – 2015</div>
+        <div class="cv-body">
+          <div class="cv-title">Chairman, Austrian Federal Students Representation and Student's Association</div>
+          <div class="cv-desc">
+            Federal Chairman of the Student's Association ("Schülerunion") Austria's 2014/15 and
+            Lower Austria's 2013/14; Austria's first Student's Representative ("Bundesschulsprecher") 2012/13.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <span>
+      <a href="mailto:felix.wagner@phys.ethz.ch">felix.wagner@phys.ethz.ch</a>
+      &nbsp;·&nbsp;
+      Quantum Device Lab, ETH Zürich
+      &nbsp;·&nbsp;
+      ETHZ-PSI Quantum Computing Hub
+    </span>
+    <span>Last updated: 02/24</span>
+  </div>
+</footer>
+
+<script>
+  function toggleNav() {
+    document.getElementById('nav-links').classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>

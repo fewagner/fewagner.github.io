@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EXCESS | Felix Wagner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a class="nav-brand" href="../index.html">Felix Wagner</a>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../research.html">Research</a></li>
+      <li class="has-dropdown">
+        <a href="#" class="active">Projects ▾</a>
+        <ul class="dropdown-menu">
+          <li><a href="ml4cpd.html">ML4CPD</a></li>
+          <li><a href="excess.html">EXCESS</a></li>
+          <li><a href="spin-dependent-dm.html">Spin-dependent dark matter</a></li>
+        </ul>
+      </li>
+      <li><a href="../publications.html">Publications</a></li>
+      <li><a href="../talks.html">Talks</a></li>
+      <li><a href="../teaching.html">Teaching</a></li>
+      <li><a href="../cv.html">CV</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="page-header">
+      <h1>EXCESS Workshop</h1>
+    </div>
+
+    <div class="figure-block float-right">
+      <figure>
+        <img src="../images/excess_spectra.avif" alt="EXCESS workshop spectra">
+      </figure>
+    </div>
+
+    <p>
+      Many low-threshold experiments observe sharply rising event rates of yet unknown origins below a
+      few hundred eV, and larger than expected from known backgrounds. Due to the significant impact of
+      this excess on the dark matter or neutrino sensitivity of these experiments, a collective effort
+      has been started to share the knowledge about the individual observations. For this, the EXCESS
+      Workshop was initiated.
+    </p>
+
+    <p>
+      In its first iteration in June 2021, ten rare event search collaborations contributed to this
+      initiative via talks and discussions. The contributing collaborations were CONNIE, CRESST, DAMIC,
+      EDELWEISS, MINER, NEWS-G, NUCLEUS, RICOCHET, SENSEI and SuperCDMS. They presented data about
+      their observed energy spectra and known backgrounds together with details about the respective
+      measurements. In the resulting white paper
+      (<a href="https://scipost.org/SciPostPhysProc.9.001" target="_blank">SciPost Phys. Proc. 9, 001 (2022)</a>),
+      we summarize the presented information and give a comprehensive overview of the similarities and
+      differences between the distinct measurements. The provided data is furthermore publicly available
+      on the workshop's data repository together with a plotting tool for visualization.
+    </p>
+
+    <p>Two more iterations of the workshop took place in 2022. In the coming years the workshop is supposed to take place annually.</p>
+
+    <section class="clearfix" style="margin-top: 2rem;">
+      <h2>Workshop Events</h2>
+      <ul>
+        <li><a href="https://indico.cern.ch/event/1013203/" target="_blank">EXCESS Workshop, June 2021 (CERN Indico)</a></li>
+        <li><a href="https://indico.scc.kit.edu/event/2575/" target="_blank">EXCESS Workshop, 2022 (KIT Indico)</a></li>
+        <li><a href="https://indico.cern.ch/event/1117540/" target="_blank">EXCESS Workshop, 2022 (CERN Indico)</a></li>
+      </ul>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <span>
+      <a href="mailto:felix.wagner@phys.ethz.ch">felix.wagner@phys.ethz.ch</a>
+      &nbsp;·&nbsp;
+      Quantum Device Lab, ETH Zürich
+      &nbsp;·&nbsp;
+      ETHZ-PSI Quantum Computing Hub
+    </span>
+    <span>Last updated: 02/24</span>
+  </div>
+</footer>
+
+<script>
+  function toggleNav() {
+    document.getElementById('nav-links').classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>

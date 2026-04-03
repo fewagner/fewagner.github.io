@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teaching | Felix Wagner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a class="nav-brand" href="index.html">Felix Wagner</a>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li class="has-dropdown">
+        <a href="#">Projects ▾</a>
+        <ul class="dropdown-menu">
+          <li><a href="projects/ml4cpd.html">ML4CPD</a></li>
+          <li><a href="projects/excess.html">EXCESS</a></li>
+          <li><a href="projects/spin-dependent-dm.html">Spin-dependent dark matter</a></li>
+        </ul>
+      </li>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="talks.html">Talks</a></li>
+      <li><a href="teaching.html" class="active">Teaching</a></li>
+      <li><a href="cv.html">CV</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="page-header">
+      <h1>Teaching</h1>
+    </div>
+
+    <section>
+      <h2>Teaching Assistant Positions</h2>
+
+      <h3>Physics 2 for Material Science — ETH Zurich</h3>
+
+      <h3>Quantum Information Processing 2 — ETH Zurich</h3>
+
+      <h3>Statistical Methods of Data Analysis — University of Vienna</h3>
+      <p>
+        I designed and taught the exercise classes on descriptive and inferential (likelihoods, Bayes, …)
+        statistics for physics graduate students.
+      </p>
+
+      <h3>Electrodynamics I — TU Vienna</h3>
+      <p>
+        I supervised one of the exercise classes on electrodynamics and special relativity for physics
+        undergraduate students.
+      </p>
+    </section>
+
+    <section>
+      <h2>Lectures and Seminars</h2>
+      <ul>
+        <li>
+          <strong>CERN Quantum Technologies Lecture Series, 2023:</strong>
+          Superconducting thermometers for the direct detection of dark matter.
+        </li>
+        <li>
+          <strong>Inverted CERN School of Computing, 2023:</strong>
+          Introduction to Reinforcement Learning.
+        </li>
+        <li>
+          <strong>Summer school on artificial intelligence of the Austrian Academy of Sciences, 2021:</strong>
+          Introduction to deep learning in PyTorch.
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Supervised Theses and Projects</h2>
+      <ul>
+        <li>Emre Vardar (ETH, master thesis, 2026)</li>
+        <li>Lan Zhang (ETH, semester thesis, 2025)</li>
+        <li>Peter Mukovskiy (ETH, semester thesis, 2025)</li>
+        <li>Mattéo Maury (ETH, semester thesis, 2025)</li>
+        <li>Tilly Schaaf (ETH, semester thesis, 2025)</li>
+        <li>Romeck Kloezen (ETH, semester thesis, 2024)</li>
+        <li>David Tartarotti (HEPHY, bachelor thesis, 2023)</li>
+        <li>Kolos Niedermayer (HEPHY, bachelor thesis, 2023)</li>
+        <li>Yasar Ilhan (HEPHY, project thesis, 2022)</li>
+        <li>Damir Rizvanovic (master and project thesis, 2022)</li>
+        <li>Moriz Lackner (master thesis, 2022)</li>
+        <li>Fatih Okcu (HEPHY, project thesis)</li>
+        <li>Matthias Eiselt (HEPHY, project thesis)</li>
+        <li>Matthias Kettner (HEPHY, project thesis)</li>
+        <li>Pascal Schanner (HEPHY, bachelor thesis)</li>
+      </ul>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <span>
+      <a href="mailto:felix.wagner@phys.ethz.ch">felix.wagner@phys.ethz.ch</a>
+      &nbsp;·&nbsp;
+      Quantum Device Lab, ETH Zürich
+      &nbsp;·&nbsp;
+      ETHZ-PSI Quantum Computing Hub
+    </span>
+    <span>Last updated: 02/24</span>
+  </div>
+</footer>
+
+<script>
+  function toggleNav() {
+    document.getElementById('nav-links').classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>

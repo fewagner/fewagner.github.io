@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spin-dependent Dark Matter | Felix Wagner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a class="nav-brand" href="../index.html">Felix Wagner</a>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../research.html">Research</a></li>
+      <li class="has-dropdown">
+        <a href="#" class="active">Projects ▾</a>
+        <ul class="dropdown-menu">
+          <li><a href="ml4cpd.html">ML4CPD</a></li>
+          <li><a href="excess.html">EXCESS</a></li>
+          <li><a href="spin-dependent-dm.html">Spin-dependent dark matter</a></li>
+        </ul>
+      </li>
+      <li><a href="../publications.html">Publications</a></li>
+      <li><a href="../talks.html">Talks</a></li>
+      <li><a href="../teaching.html">Teaching</a></li>
+      <li><a href="../cv.html">CV</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="page-header">
+      <h1>Spin-dependent Dark Matter</h1>
+    </div>
+
+    <p>
+      In CRESST's latest major results paper
+      (<a href="https://journals.aps.org/prd/abstract/10.1103/PhysRevD.106.092008" target="_blank">Phys. Rev. D 106, 092008</a>)
+      we describe world-leading limits on spin-dependent dark matter derived with two detectors with
+      lithium aluminate targets.
+    </p>
+
+    <section>
+      <h2>Testing Spin-dependent Dark Matter Interactions with Lithium Aluminate Targets in CRESST-III</h2>
+
+      <div class="img-row">
+        <figure>
+          <img src="../images/spindm_screenshot1.avif" alt="CRESST-III spin-dependent dark matter results">
+        </figure>
+        <figure>
+          <img src="../images/spindm_screenshot2.avif" alt="CRESST-III spin-dependent dark matter limits">
+        </figure>
+      </div>
+
+      <p>
+        In the past decades, numerous experiments have emerged to unveil the nature of dark matter,
+        one of the most discussed open questions in modern particle physics. Among them, the Cryogenic
+        Rare Event Search with Superconducting Thermometers (CRESST) experiment, located at the
+        Laboratori Nazionali del Gran Sasso, operates scintillating crystals as cryogenic phonon
+        detectors.
+      </p>
+
+      <p>
+        In this work, we present first results from the operation of two detector modules which both
+        have 10.46 g LiAlO₂ targets in CRESST-III. The lithium contents in the crystal are ⁶Li, with
+        an odd number of protons and neutrons, and ⁷Li, with an odd number of protons. By considering
+        both isotopes of lithium and ²⁷Al, we set the currently strongest cross section upper limits on
+        spin-dependent interaction of dark matter with protons and neutrons for the mass region between
+        0.25 and 1.5 GeV/c².
+      </p>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <span>
+      <a href="mailto:felix.wagner@phys.ethz.ch">felix.wagner@phys.ethz.ch</a>
+      &nbsp;·&nbsp;
+      Quantum Device Lab, ETH Zürich
+      &nbsp;·&nbsp;
+      ETHZ-PSI Quantum Computing Hub
+    </span>
+    <span>Last updated: 02/24</span>
+  </div>
+</footer>
+
+<script>
+  function toggleNav() {
+    document.getElementById('nav-links').classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>

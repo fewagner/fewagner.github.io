@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ML4CPD | Felix Wagner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a class="nav-brand" href="../index.html">Felix Wagner</a>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../research.html">Research</a></li>
+      <li class="has-dropdown">
+        <a href="#" class="active">Projects ▾</a>
+        <ul class="dropdown-menu">
+          <li><a href="ml4cpd.html">ML4CPD</a></li>
+          <li><a href="excess.html">EXCESS</a></li>
+          <li><a href="spin-dependent-dm.html">Spin-dependent dark matter</a></li>
+        </ul>
+      </li>
+      <li><a href="../publications.html">Publications</a></li>
+      <li><a href="../talks.html">Talks</a></li>
+      <li><a href="../teaching.html">Teaching</a></li>
+      <li><a href="../cv.html">CV</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="page-header">
+      <h1>ML4CPD</h1>
+    </div>
+
+    <p>
+      Machine learning for cryogenic particle detectors (ML4CPD) is a project funded by the industrial
+      PhD program of the Austrian research promotion agency for the years 2020–2023. In the course of
+      this project we are building machine learning methods to automate data analysis and control of
+      cryogenic calorimeters that are used by the CRESST and COSINUS experiments for the direct detection
+      of dark matter. Below I highlight some pieces of the scientific output of our project.
+    </p>
+
+    <section>
+      <h2>Cait — Analysis Toolkit for Cryogenic Particle Detectors</h2>
+
+      <div class="figure-block float-right">
+        <figure>
+          <img src="../images/ml4cpd_schematic.avif" alt="ML4CPD project schematic">
+        </figure>
+      </div>
+
+      <p>
+        Cryogenic solid state detectors are widely used in dark matter and neutrino experiments, and
+        require a sensible raw data analysis. For this purpose, we present Cait, an open source Python
+        package with all essential methods for the analysis of detector modules fully integrable with
+        the Python ecosystem for scientific computing and machine learning. It comes with methods for
+        triggering of events from continuously sampled streams, identification of particle recoils and
+        artifacts in a low signal-to-noise ratio environment, the reconstruction of deposited energies,
+        and the simulation of a variety of typical event types. Furthermore, by connecting Cait with
+        existing machine learning frameworks we introduce novel methods for better automation in data
+        cleaning and background rejection.
+      </p>
+
+      <p>
+        Cait was published in the CSBS journal
+        (<a href="https://link.springer.com/article/10.1007/s41781-022-00092-4" target="_blank">Comput Softw Big Sci 6, 19</a>)
+        and is available on PyPI, Zenodo, ReadtheDocs and GitHub.
+      </p>
+    </section>
+
+    <section class="clearfix">
+      <h2>Towards Automated Data Cleaning with Deep Learning in CRESST</h2>
+
+      <div class="img-row">
+        <figure>
+          <img src="../images/ml4cpd_screenshot1.avif" alt="Data cleaning results">
+        </figure>
+        <figure>
+          <img src="../images/ml4cpd_screenshot2.avif" alt="Data cleaning classifier performance">
+        </figure>
+      </div>
+
+      <p>
+        Our preprint about automated data cleaning is available online
+        (<a href="https://arxiv.org/abs/2211.00564" target="_blank">arXiv:2211.00564</a>)
+        and was accepted for publication in the EPJ+ journal.
+      </p>
+
+      <p>
+        The signals recorded with cryogenic calorimeters need to undergo a careful cleaning process to
+        avoid wrongly reconstructed recoil energies caused by pile-up and read-out artefacts. We frame
+        this process as a time series classification task and propose to automate it with neural networks.
+        With a data set of over one million labeled records from 68 detectors, recorded between 2013 and
+        2019 by CRESST, we test the capability of four commonly used neural network architectures to learn
+        the data cleaning task. Our best-performing model achieves a balanced accuracy of 0.932 on our
+        test set. We show on an exemplary detector that about half of the wrongly predicted events are in
+        fact wrongly labeled events, and a large share of the remaining ones have a context-dependent
+        ground truth. We furthermore evaluate the recall and selectivity of our classifiers with simulated
+        data. The results confirm that the trained classifiers are well-suited for the data-cleaning task.
+      </p>
+
+      <p>
+        Different from standard approaches, we do not rely on prior knowledge of individual detectors,
+        such as their characteristic pulse shape, or manual interventions, such as finding individual
+        cut values. Our results can have the following impacts:
+      </p>
+      <ul>
+        <li>
+          For large-scale detector setups the fine-tuning of dedicated cuts for each detector can produce
+          non-negligible delays in the analysis or even become infeasible. The application of our models
+          instead can produce equivalent cuts instantly.
+        </li>
+        <li>
+          Recorded data can be monitored in real-time. This can uncover unwanted shifts in the measurement
+          setup, e.g. an increased rate of artefacts, immediately and enable fast interventions.
+          Furthermore, features in the event distribution, e.g. a peak in the PH spectrum, can be
+          identified as particle-like or artefact-like, without the need for designing cuts first.
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Optimal Operation of Cryogenic Calorimeters Through Deep Reinforcement Learning</h2>
+
+      <p>
+        Our method for automated and optimal detector operation was presented at ACAT22 and published in 2024.
+      </p>
+
+      <p>
+        Cryogenic phonon detectors are used by direct detection dark matter experiments to achieve
+        sensitivity to light dark matter particle interactions. Such detectors consist of a target crystal
+        equipped with a superconducting thermometer. The temperature of the thermometer and the bias
+        current in its readout circuit need careful optimization to achieve optimal sensitivity of the
+        detector. This task is not trivial and has to be done manually by an expert. In our work, we
+        created a simulation of the detector response as an OpenAI Gym reinforcement learning environment.
+        In the simulation, we test the capability of a soft actor critic agent to perform the task. We
+        accomplish the optimization of a standard detector in the equivalent of 30 minutes of real
+        measurement time, which is faster than most human experts. Our method can improve the scalability
+        of multi-detector setups.
+      </p>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <span>
+      <a href="mailto:felix.wagner@phys.ethz.ch">felix.wagner@phys.ethz.ch</a>
+      &nbsp;·&nbsp;
+      Quantum Device Lab, ETH Zürich
+      &nbsp;·&nbsp;
+      ETHZ-PSI Quantum Computing Hub
+    </span>
+    <span>Last updated: 02/24</span>
+  </div>
+</footer>
+
+<script>
+  function toggleNav() {
+    document.getElementById('nav-links').classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>

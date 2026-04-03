@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Research | Felix Wagner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a class="nav-brand" href="index.html">Felix Wagner</a>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="research.html" class="active">Research</a></li>
+      <li class="has-dropdown">
+        <a href="#">Projects ▾</a>
+        <ul class="dropdown-menu">
+          <li><a href="projects/ml4cpd.html">ML4CPD</a></li>
+          <li><a href="projects/excess.html">EXCESS</a></li>
+          <li><a href="projects/spin-dependent-dm.html">Spin-dependent dark matter</a></li>
+        </ul>
+      </li>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="talks.html">Talks</a></li>
+      <li><a href="teaching.html">Teaching</a></li>
+      <li><a href="cv.html">CV</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="page-header">
+      <h1>Research</h1>
+    </div>
+
+    <p>
+      I am working on experiments for the direct detection of dark matter and compiled a brief introduction
+      to the field below. A few more details of my projects are listed in the menu under "Projects".
+    </p>
+
+    <section class="clearfix">
+      <h2>Dark Matter</h2>
+
+      <div class="figure-block float-right">
+        <figure>
+          <img src="images/dark_matter_pie.avif" alt="Dark matter composition of the universe">
+          <figcaption>
+            Composition of the universe. Source:
+            <a href="https://wmap.gsfc.nasa.gov/universe/uni_matter.html" target="_blank">NASA/WMAP</a>
+          </figcaption>
+        </figure>
+      </div>
+
+      <p>
+        Dark matter is a type of matter that does not interact with light or other forms of electromagnetic
+        radiation, making it invisible to telescopes. However, its presence can be inferred through its
+        gravitational effects on visible matter, such as the rotation curves of galaxies. It is estimated
+        that dark matter makes up approximately 85% of the matter in the universe. No dark matter particle
+        was measured until today, making its nature one of the biggest open questions in modern physics.
+      </p>
+    </section>
+
+    <section class="clearfix">
+      <h2>Direct Detection Experiments</h2>
+
+      <div class="figure-block float-left">
+        <figure>
+          <img src="images/dd_spectra.avif" alt="Expected dark matter scattering rate in a silicon detector">
+          <figcaption>Expected scattering rate in a silicon detector for various dark matter masses.</figcaption>
+        </figure>
+      </div>
+
+      <p>
+        Direct detection experiments, such as CRESST and COSINUS, aim to detect dark matter particles through
+        their interactions with normal matter. These experiments use detectors made of sensitive materials,
+        such as crystals or scintillating liquids, to detect the tiny amounts of energy released when a dark
+        matter particle collides with an atom in the detector. By studying these interactions, researchers
+        hope to learn more about the properties of dark matter and its role in the universe.
+      </p>
+
+      <p>
+        In the figure left I show the expected scattering rate in an earth-based silicon detector, normalized
+        to the mass of the detector and the runtime of the measurement, for various dark matter masses.
+      </p>
+    </section>
+
+    <section class="clearfix">
+      <h2>Cryogenic Calorimeters with Transition Edge Sensors</h2>
+
+      <p>
+        Cryogenic calorimeters are a type of detector used in direct detection experiments for dark matter
+        that rely on the measurement of heat produced by the collision of a dark matter particle with the
+        detector. These detectors typically consist of a sensor made of a sensitive material, such as a
+        crystal or scintillating material, that is cooled to extremely low temperatures, typically around
+        10 millikelvin, to minimize thermal noise. Transition Edge Sensors (TES) are a type of sensor used
+        in these detectors that rely on the measurement of the change in resistance of a thin film of
+        superconducting material when it is exposed to a small amount of heat produced by the collision of
+        a dark matter particle with the detector. TES are highly sensitive and have high energy resolution,
+        making them suitable for detecting low-energy particle interactions.
+      </p>
+
+      <p>
+        There are several specific challenges in detecting dark matter with cryogenic calorimeters and TES.
+        The property dominating the sensitivity of a detector is the energy threshold, i.e. the lowest
+        particle recoil energy that can be detected. To optimize this, the superconducting film is operated
+        in its transition from superconducting to normal conducting state, for that a careful fine tuning
+        of the operation settings is necessary.
+      </p>
+
+      <p>
+        Ideally, particle recoils in the detector produce pulse-shaped voltage traces in the readout
+        electronics. The shape and amplitude of these pulses needs to be analyzed to discriminate recoils
+        from instrumental artefacts, and recoil energies need to be calibrated.
+      </p>
+
+      <p>
+        Furthermore, interactions of other particles in the detector (backgrounds) need to be minimized,
+        which is why experiments are usually done in underground laboratories, as e.g. the Laboratori
+        Nazionali del Gran Sasso (LNGS) in Italy, where we do our experiments.
+      </p>
+
+      <p>Below I show a transition curve of a TES and an exemplary pulse from a particle recoil.</p>
+
+      <div class="img-row">
+        <figure>
+          <img src="images/tes.avif" alt="Transition curve of a TES">
+          <figcaption>Transition curve of a Transition Edge Sensor (TES).</figcaption>
+        </figure>
+        <figure>
+          <img src="images/pulse.avif" alt="Exemplary pulse from a particle recoil">
+          <figcaption>Exemplary pulse from a particle recoil.</figcaption>
+        </figure>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <span>
+      <a href="mailto:felix.wagner@phys.ethz.ch">felix.wagner@phys.ethz.ch</a>
+      &nbsp;·&nbsp;
+      Quantum Device Lab, ETH Zürich
+      &nbsp;·&nbsp;
+      ETHZ-PSI Quantum Computing Hub
+    </span>
+    <span>Last updated: 02/24</span>
+  </div>
+</footer>
+
+<script>
+  function toggleNav() {
+    document.getElementById('nav-links').classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
