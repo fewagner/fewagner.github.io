@@ -17,7 +17,8 @@ html {
 body {
   font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
   color: #555;
-  background: #fff;
+  background: url('../images/background.jpg') center top / 100% auto repeat;
+  background-attachment: fixed;
   line-height: 1.7;
 }
 
@@ -46,10 +47,11 @@ img {
 /* --- Navigation ------------------------------------------- */
 nav {
   border-bottom: 1px solid #e0e0e0;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.95);
   position: sticky;
   top: 0;
   z-index: 100;
+  backdrop-filter: blur(8px);
 }
 
 nav .container {
@@ -95,7 +97,8 @@ nav .container {
   position: absolute;
   top: 60px;
   left: 0;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(8px);
   border: 1px solid #e0e0e0;
   border-top: 2px solid #2a6ebb;
   min-width: 220px;
@@ -152,6 +155,13 @@ nav .container {
 /* --- Main Content ----------------------------------------- */
 main {
   padding: 2rem 0 5rem;
+}
+
+main > .container {
+  background: rgba(255, 255, 255, 0.92);
+  padding: 1rem 2rem 2rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
 }
 
 /* --- Home: Hero ------------------------------------------- */
@@ -402,6 +412,8 @@ footer {
   padding: 2rem 0;
   font-size: 0.85rem;
   color: #aaa;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
 }
 
 footer .container {
@@ -443,7 +455,8 @@ footer a:hover {
     top: 60px;
     left: 0;
     right: 0;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(8px);
     border-bottom: 1px solid #e0e0e0;
     padding: 1rem 0;
     z-index: 100;

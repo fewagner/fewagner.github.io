@@ -20,8 +20,10 @@
       <li><a href="index.html">Home</a></li>
       <li><a href="research.html" class="active">Research</a></li>
       <li class="has-dropdown">
-        <a href="#">Projects ▾</a>
+        <a href="#">Projects &#9662;</a>
         <ul class="dropdown-menu">
+          <li><a href="projects/superqsense.html">SuperQSense</a></li>
+          <li><a href="projects/metsuperq.html">MetSuperQ</a></li>
           <li><a href="projects/ml4cpd.html">ML4CPD</a></li>
           <li><a href="projects/excess.html">EXCESS</a></li>
           <li><a href="projects/spin-dependent-dm.html">Spin-dependent dark matter</a></li>
@@ -42,12 +44,15 @@
     </div>
 
     <p>
-      I am working on experiments for the direct detection of dark matter and compiled a brief introduction
-      to the field below. A few more details of my projects are listed in the menu under "Projects".
+      My research connects superconducting quantum circuits with particle physics.
+      Superconducting qubits are sensitive to single quasiparticles and photons,
+      making them both vulnerable to environmental backgrounds and uniquely suited as
+      sensors for fundamental physics. Below I outline the three pillars of my work.
+      More details on specific projects can be found under "Projects" in the menu.
     </p>
 
     <section class="clearfix">
-      <h2>Dark Matter</h2>
+      <h2>Superconducting Qubits are Particle Detectors</h2>
 
       <div class="figure-block float-right">
         <figure>
@@ -60,16 +65,32 @@
       </div>
 
       <p>
-        Dark matter is a type of matter that does not interact with light or other forms of electromagnetic
-        radiation, making it invisible to telescopes. However, its presence can be inferred through its
-        gravitational effects on visible matter, such as the rotation curves of galaxies. It is estimated
-        that dark matter makes up approximately 85% of the matter in the universe. No dark matter particle
-        was measured until today, making its nature one of the biggest open questions in modern physics.
+        Superconducting qubits are micrometer-scale circuits made of superconducting thin films,
+        operated at millikelvin temperatures inside dilution refrigerators. A quantum state is captured
+        in the electromagnetic field of a junction-capacitor loop, with transition energies of only
+        a few microelectronvolts. This makes them among the most sensitive devices ever built &mdash;
+        but also vulnerable to their environment.
+      </p>
+
+      <p>
+        The superconductor's electrons form Cooper pairs with a binding energy of about one
+        millielectronvolt. Ambient radiation &mdash; infrared photons, microwave fields, or cosmic rays &mdash;
+        can break these pairs and generate Bogoliubov quasiparticles, unbound electrons that
+        interact with the trapped quantum state and cause computational errors. For quantum computing,
+        this is a problem. But for particle physics, it is an opportunity: superconducting qubits
+        can detect single quasiparticles, a capability that even the most sensitive dark matter
+        experiments with conventional superconducting sensors have not yet achieved.
+      </p>
+
+      <p>
+        Particle physicists and quantum physicists share strikingly similar tools &mdash; superconducting
+        sensors, high-quality microwave cavities, and millikelvin cryostats &mdash; creating a unique
+        opportunity to simultaneously advance quantum computing and the search for new physics.
       </p>
     </section>
 
     <section class="clearfix">
-      <h2>Direct Detection Experiments</h2>
+      <h2>Quasiparticles in Superconducting Quantum Processors</h2>
 
       <div class="figure-block float-left">
         <figure>
@@ -79,55 +100,50 @@
       </div>
 
       <p>
-        Direct detection experiments, such as CRESST and COSINUS, aim to detect dark matter particles through
-        their interactions with normal matter. These experiments use detectors made of sensitive materials,
-        such as crystals or scintillating liquids, to detect the tiny amounts of energy released when a dark
-        matter particle collides with an atom in the detector. By studying these interactions, researchers
-        hope to learn more about the properties of dark matter and its role in the universe.
+        Quasiparticle poisoning is one of the key challenges on the path to error-corrected quantum
+        computing. When a quasiparticle tunnels across the Josephson junction of a qubit, it can
+        absorb energy from the electrical field, causing relaxation (T<sub>1</sub> errors), or shift the
+        qubit's transition frequency, causing dephasing (T<sub>2</sub> errors). High-energy events such as
+        cosmic ray impacts can generate bursts of quasiparticles that simultaneously affect multiple
+        qubits, leading to correlated errors across a quantum processor.
       </p>
 
       <p>
-        In the figure left I show the expected scattering rate in an earth-based silicon detector, normalized
-        to the mass of the detector and the runtime of the measurement, for various dark matter masses.
+        Together with the team of the ETHZ-PSI Quantum Computing Hub at ETH Zurich,
+        we study the origin, dynamics, and mitigation strategies of quasiparticle backgrounds.
+        We use charge-sensitive superconducting qubits as quasiparticle sensors to
+        investigate infrared and particle backgrounds in quantum computing setups. Understanding
+        the microphysics of these processes is essential for building the next generation of
+        quantum processors with longer coherence times and lower error rates.
       </p>
     </section>
 
     <section class="clearfix">
-      <h2>Cryogenic Calorimeters with Transition Edge Sensors</h2>
+      <h2>Direct Detection of Dark Matter</h2>
 
       <p>
-        Cryogenic calorimeters are a type of detector used in direct detection experiments for dark matter
-        that rely on the measurement of heat produced by the collision of a dark matter particle with the
-        detector. These detectors typically consist of a sensor made of a sensitive material, such as a
-        crystal or scintillating material, that is cooled to extremely low temperatures, typically around
-        10 millikelvin, to minimize thermal noise. Transition Edge Sensors (TES) are a type of sensor used
-        in these detectors that rely on the measurement of the change in resistance of a thin film of
-        superconducting material when it is exposed to a small amount of heat produced by the collision of
-        a dark matter particle with the detector. TES are highly sensitive and have high energy resolution,
-        making them suitable for detecting low-energy particle interactions.
+        Dark matter makes up approximately 85% of all matter in the universe, yet no dark matter
+        particle has been directly detected to date. Its presence is inferred through gravitational
+        effects, such as the rotation curves of galaxies, making its nature one of the biggest open
+        questions in modern physics.
       </p>
 
       <p>
-        There are several specific challenges in detecting dark matter with cryogenic calorimeters and TES.
-        The property dominating the sensitivity of a detector is the energy threshold, i.e. the lowest
-        particle recoil energy that can be detected. To optimize this, the superconducting film is operated
-        in its transition from superconducting to normal conducting state, for that a careful fine tuning
-        of the operation settings is necessary.
+        Direct detection experiments, such as CRESST and COSINUS, use cryogenic calorimeters to
+        detect the tiny amounts of energy released when a dark matter particle collides with an atom
+        in the detector. These detectors are cooled to about 10 millikelvin and employ Transition Edge
+        Sensors (TES) &mdash; thin superconducting films operated at their superconducting-to-normal
+        transition &mdash; to achieve high sensitivity to low-energy particle interactions.
       </p>
 
       <p>
-        Ideally, particle recoils in the detector produce pulse-shaped voltage traces in the readout
-        electronics. The shape and amplitude of these pulses needs to be analyzed to discriminate recoils
-        from instrumental artefacts, and recoil energies need to be calibrated.
+        During my PhD at the Institute for High Energy Physics of the Austrian Academy of Sciences,
+        I worked on the data analysis, software development, and detector physics of these experiments,
+        including machine learning methods for automated data cleaning and detector optimization.
+        This experience in superconducting sensor physics now informs my current work on
+        superconducting qubits, where similar challenges in microphysics, backgrounds, and fabrication
+        arise.
       </p>
-
-      <p>
-        Furthermore, interactions of other particles in the detector (backgrounds) need to be minimized,
-        which is why experiments are usually done in underground laboratories, as e.g. the Laboratori
-        Nazionali del Gran Sasso (LNGS) in Italy, where we do our experiments.
-      </p>
-
-      <p>Below I show a transition curve of a TES and an exemplary pulse from a particle recoil.</p>
 
       <div class="img-row">
         <figure>
@@ -147,12 +163,12 @@
   <div class="container">
     <span>
       <a href="mailto:felix.wagner@phys.ethz.ch">felix.wagner@phys.ethz.ch</a>
-      &nbsp;·&nbsp;
+      &nbsp;&middot;&nbsp;
       Quantum Device Lab, ETH Zürich
-      &nbsp;·&nbsp;
+      &nbsp;&middot;&nbsp;
       ETHZ-PSI Quantum Computing Hub
     </span>
-    <span>Last updated: 02/24</span>
+    <span>Last updated: 04/26</span>
   </div>
 </footer>
 

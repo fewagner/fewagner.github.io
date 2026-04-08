@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fewagner.github.io/sitemap.xml
