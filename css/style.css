@@ -17,8 +17,7 @@ html {
 body {
   font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
   color: #555;
-  background: url('../images/background.jpg') center top / 100% auto repeat;
-  background-attachment: fixed;
+  background: #fff;
   line-height: 1.7;
 }
 
