@@ -24,9 +24,12 @@
         <ul class="dropdown-menu">
           <li><a href="superqsense.html">SuperQSense</a></li>
           <li><a href="metsuperq.html">MetSuperQ</a></li>
+          <li><a href="cresst.html">CRESST</a></li>
+          <li><a href="cosinus.html">COSINUS</a></li>
           <li><a href="ml4cpd.html">ML4CPD</a></li>
           <li><a href="excess.html">EXCESS</a></li>
-          <li><a href="spin-dependent-dm.html">Spin-dependent dark matter</a></li>
+          <li><a href="https://github.com/fewagner/quantum101" target="_blank">quantum101</a></li>
+          <li><a href="https://fewagner.com/easy-calculators/" target="_blank">Easy calculators</a></li>
         </ul>
       </li>
       <li><a href="../publications.html">Publications</a></li>
@@ -56,7 +59,7 @@
 
       <div class="figure-block float-right">
         <figure>
-          <img src="../images/ml4cpd_schematic.avif" alt="ML4CPD project schematic">
+          <img src="../images/ml4cpd_screenshot1.avif" alt="Cait analysis interface">
         </figure>
       </div>
 
@@ -82,59 +85,39 @@
     <section class="clearfix">
       <h2>Towards Automated Data Cleaning with Deep Learning in CRESST</h2>
 
-      <div class="img-row">
-        <figure>
-          <img src="../images/ml4cpd_screenshot1.avif" alt="Data cleaning results">
-        </figure>
+      <div class="figure-block float-right">
         <figure>
           <img src="../images/ml4cpd_screenshot2.avif" alt="Data cleaning classifier performance">
         </figure>
       </div>
 
       <p>
-        Our preprint about automated data cleaning is available online
-        (<a href="https://arxiv.org/abs/2211.00564" target="_blank">arXiv:2211.00564</a>)
-        and was accepted for publication in the EPJ+ journal.
+        Our automated data cleaning work was published in EPJ+
+        (<a href="https://link.springer.com/article/10.1140/epjp/s13360-023-03674-2" target="_blank">Eur. Phys. J. Plus 138, 100</a>).
       </p>
 
       <p>
         The signals recorded with cryogenic calorimeters need to undergo a careful cleaning process to
         avoid wrongly reconstructed recoil energies caused by pile-up and read-out artefacts. We frame
-        this process as a time series classification task and propose to automate it with neural networks.
-        With a data set of over one million labeled records from 68 detectors, recorded between 2013 and
-        2019 by CRESST, we test the capability of four commonly used neural network architectures to learn
-        the data cleaning task. Our best-performing model achieves a balanced accuracy of 0.932 on our
-        test set. We show on an exemplary detector that about half of the wrongly predicted events are in
-        fact wrongly labeled events, and a large share of the remaining ones have a context-dependent
-        ground truth. We furthermore evaluate the recall and selectivity of our classifiers with simulated
-        data. The results confirm that the trained classifiers are well-suited for the data-cleaning task.
+        this process as a time-series classification task and automate it with neural networks trained on
+        more than one million labeled records from 68 CRESST detectors. The best model reaches a balanced
+        accuracy of 0.932 and can provide fast, detector-independent quality cuts for large cryogenic
+        detector arrays.
       </p>
-
-      <p>
-        Different from standard approaches, we do not rely on prior knowledge of individual detectors,
-        such as their characteristic pulse shape, or manual interventions, such as finding individual
-        cut values. Our results can have the following impacts:
-      </p>
-      <ul>
-        <li>
-          For large-scale detector setups the fine-tuning of dedicated cuts for each detector can produce
-          non-negligible delays in the analysis or even become infeasible. The application of our models
-          instead can produce equivalent cuts instantly.
-        </li>
-        <li>
-          Recorded data can be monitored in real-time. This can uncover unwanted shifts in the measurement
-          setup, e.g. an increased rate of artefacts, immediately and enable fast interventions.
-          Furthermore, features in the event distribution, e.g. a peak in the PH spectrum, can be
-          identified as particle-like or artefact-like, without the need for designing cuts first.
-        </li>
-      </ul>
     </section>
 
-    <section>
+    <section class="clearfix">
       <h2>Optimal Operation of Cryogenic Calorimeters Through Deep Reinforcement Learning</h2>
 
+      <div class="figure-block float-right">
+        <figure>
+          <img src="../images/ml4cpd_schematic.avif" alt="ML4CPD project schematic">
+        </figure>
+      </div>
+
       <p>
-        Our method for automated and optimal detector operation was presented at ACAT22 and published in 2024.
+        Our method for automated and optimal detector operation was presented at ACAT22 and published in 2024
+        (<a href="https://link.springer.com/article/10.1007/s41781-024-00119-y" target="_blank">Comput Softw Big Sci 8, 10</a>).
       </p>
 
       <p>
