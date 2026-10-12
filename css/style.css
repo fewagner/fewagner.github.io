@@ -204,6 +204,8 @@ main > .container {
 
 /* --- Sections --------------------------------------------- */
 section {
+  clear: both;
+  margin-top: 3rem;
   margin-bottom: 3rem;
 }
 
@@ -223,17 +225,18 @@ section h3 {
   margin: 1.5rem 0 0.5rem;
 }
 
-section p {
+/* Paragraphs and lists are spaced the same inside and outside sections */
+main p {
   margin-bottom: 1rem;
   font-size: 0.975rem;
 }
 
-section ul, section ol {
+main ul, main ol {
   padding-left: 1.5rem;
   margin-bottom: 1rem;
 }
 
-section li {
+main li {
   margin-bottom: 0.4rem;
   font-size: 0.975rem;
 }
@@ -290,6 +293,37 @@ section li {
 }
 
 .img-row figcaption {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 0.4rem;
+  text-align: center;
+}
+
+/* --- Embedded animation ----------------------------------- */
+.anim-figure {
+  margin: 2rem 0;
+}
+
+/* 16:9 scene plus the 48px control bar of the embedded page */
+.anim-frame {
+  position: relative;
+  height: 0;
+  padding-top: calc(56.25% + 48px);
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.anim-frame iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.anim-figure figcaption {
   font-size: 0.8rem;
   color: #888;
   margin-top: 0.4rem;

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SuperQSense | Felix Wagner</title>
+  <title>QuTHERA | Felix Wagner</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -22,7 +22,7 @@
       <li class="has-dropdown">
         <a href="#" class="active">Projects &#9662;</a>
         <ul class="dropdown-menu">
-          <li><a href="superqsense.html">SuperQSense</a></li>
+          <li><a href="quthera.html">QuTHERA</a></li>
           <li><a href="metsuperq.html">MetSuperQ</a></li>
           <li><a href="cresst.html">CRESST</a></li>
           <li><a href="cosinus.html">COSINUS</a></li>
@@ -43,19 +43,33 @@
 <main>
   <div class="container">
     <div class="page-header">
-      <h1>SuperQSense</h1>
+      <h1>QuTHERA</h1>
     </div>
 
     <p>
-      <strong>SuperQSense</strong> is a project exploring the use of superconducting qubits as sensors for
-      fundamental physics. The extraordinary sensitivity of superconducting circuits to single quasiparticles
-      and microwave photons opens new avenues for detecting faint signals from processes beyond the Standard
-      Model &mdash; including the direct detection of dark matter.
+      <strong>QuTHERA</strong> is a project for developing single-photon detectors for terahertz radiation
+      based on superconducting qubits. The project is in an early planning stage.
     </p>
 
-    <p style="text-align: center; color: #888; font-size: 1.1rem; margin: 4rem 0; padding: 2rem; border: 1px dashed #ccc; border-radius: 8px;">
-      This page is under construction. More details will be added as the project progresses.
+    <p>
+      The animation below shows the envisioned detection chain, using the search for dark-photon dark
+      matter as an example. A dark photon converts at a gold-plated copper hemisphere into a terahertz
+      photon. Since the photons are emitted normal to the surface, they converge at the center of the
+      dish, where a silicon lens couples them onto a qubit chip. The qubit island acts as an antenna and
+      delivers the photon to the Josephson junction, where it breaks a Cooper pair. The resulting
+      quasiparticle changes the charge parity of the island, which shifts the qubit resonance and is
+      detected in the transmission of a microwave probe tone.
     </p>
+
+    <figure class="anim-figure">
+      <div class="anim-frame">
+        <iframe src="quthera-animation.html" title="Animation of the QuTHERA detection chain" loading="lazy"></iframe>
+      </div>
+      <figcaption>
+        Concept of the QuTHERA detection chain.
+        <a href="quthera-animation.html" target="_blank">Open full screen</a>.
+      </figcaption>
+    </figure>
   </div>
 </main>
 
@@ -68,7 +82,7 @@
       &nbsp;&middot;&nbsp;
       ETHZ-PSI Quantum Computing Hub
     </span>
-    <span>Last updated: 04/26</span>
+    <span>Last updated: 10/26</span>
   </div>
 </footer>
 

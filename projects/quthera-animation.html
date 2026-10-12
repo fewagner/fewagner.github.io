@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QuTHERA Detection Chain | Felix Wagner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* The 1280 x 720 scene is scaled to fit the stage; the control bar sits below it.
+       Embedded in quthera.html, and on its own it is the full-screen view. */
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: #fff;
+      color: #555;
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    .stage {
+      position: relative;
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    #scene {
+      position: absolute;
+      left: 0;
+      top: 0;
+      transform-origin: 0 0;
+    }
+
+    .rotate-hint {
+      display: none;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 1rem;
+      margin: 0;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #767676;
+    }
+
+    @media (orientation: portrait) and (max-width: 700px) {
+      .standalone .rotate-hint {
+        display: block;
+      }
+    }
+
+    .controls {
+      flex: 0 0 48px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0 0.75rem;
+      border-top: 1px solid #e0e0e0;
+      font-size: 0.8rem;
+    }
+
+    .controls button {
+      min-height: 32px;
+      padding: 0.25rem 0.65rem;
+      border: 1px solid #d5dae3;
+      border-radius: 4px;
+      background: #fff;
+      color: #555;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .controls button:hover {
+      border-color: #2a6ebb;
+      color: #2a6ebb;
+    }
+
+    .controls .rate[aria-pressed="true"] {
+      border-color: #2a6ebb;
+      background: #eef2f8;
+      color: #2a6ebb;
+    }
+
+    .controls button:focus-visible,
+    .controls a:focus-visible {
+      outline: 2px solid #2a6ebb;
+      outline-offset: 2px;
+    }
+
+    .rates {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .rates span {
+      margin-right: 0.25rem;
+    }
+
+    .controls a {
+      margin-left: auto;
+      color: #2a6ebb;
+      text-decoration: none;
+    }
+
+    .controls a:hover {
+      text-decoration: underline;
+    }
+
+    /* Scene animation, from the QuTHERA Concept Motion design */
+    .scene{--T:10s}.scene.s2{--T:20s}.scene.s4{--T:40s}
+    .scene.paused *{animation-play-state:paused !important}
+    .scene sub{font-size:0.72em;vertical-align:-0.22em;line-height:0}
+    @keyframes k-progress{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+    .progress{transform-origin:left center;animation:k-progress var(--T) linear infinite}
+    
+    @keyframes k-gp{0%,3%{stroke-dashoffset:1;opacity:1}10%{stroke-dashoffset:0;opacity:1}95%{stroke-dashoffset:0;opacity:1}98%{stroke-dashoffset:0;opacity:0}99%{stroke-dashoffset:1;opacity:0}100%{stroke-dashoffset:1;opacity:1}}
+    .gp{animation:k-gp var(--T) ease-in infinite;}
+    @keyframes k-gph{0%,9.3%{opacity:0}10.3%{opacity:1}95%{opacity:1}98%,100%{opacity:0}}
+    .gph{animation:k-gph var(--T) ease infinite;}
+    @keyframes k-ram{0%,11%{opacity:0}13%{opacity:1}95%{opacity:1}98%,100%{opacity:0}}
+    .ram{animation:k-ram var(--T) ease infinite;}
+    @keyframes k-bflash{0%,9.5%{opacity:0}11%{opacity:1}16%,100%{opacity:0}}
+    .bflash{animation:k-bflash var(--T) ease infinite;}
+    @keyframes k-ray{0%,11%{stroke-dashoffset:1;opacity:1}20.5%{stroke-dashoffset:0;opacity:1}38%{stroke-dashoffset:0;opacity:1}43%,95%{stroke-dashoffset:0;opacity:0.45}98%{stroke-dashoffset:0;opacity:0}99%{stroke-dashoffset:1;opacity:0}100%{stroke-dashoffset:1;opacity:1}}
+    .ray{animation:k-ray var(--T) ease-in-out infinite;}
+    @keyframes k-rayh{0%,20%{opacity:0}21%{opacity:1}38%{opacity:1}43%,95%{opacity:0.45}98%,100%{opacity:0}}
+    .rayh{animation:k-rayh var(--T) ease infinite;}
+    @keyframes k-pul0{0%,10.5%{opacity:0;transform:translate(0px,0px)}11%{opacity:1;transform:translate(0px,0px)}20.5%{opacity:1;transform:translate(139.89px,-100.75px)}22%,100%{opacity:0;transform:translate(139.89px,-100.75px)}}
+    .pul0{animation:k-pul0 var(--T) ease-in-out infinite;}
+    @keyframes k-lflash{0%,19.5%{opacity:0}21.5%{opacity:1}28%,100%{opacity:0}}
+    .lflash{animation:k-lflash var(--T) ease infinite;}
+    @keyframes k-cflash{0%,22%{opacity:0}24.5%{opacity:1}31%,100%{opacity:0}}
+    .cflash{animation:k-cflash var(--T) ease infinite;}
+    @keyframes k-zoomA{0%,27%{opacity:0}31%{opacity:1}95%{opacity:1}98%,100%{opacity:0}}
+    .zoomA{animation:k-zoomA var(--T) ease infinite;}
+    @keyframes k-mode{0%,41%{opacity:0}44%,50%{opacity:1}58%,100%{opacity:0}}
+    .mode{animation:k-mode var(--T) ease infinite;}
+    @keyframes k-jglow{0%,46%{opacity:0}49%{opacity:1}53%{opacity:0.6}58%,100%{opacity:0}}
+    .jglow{animation:k-jglow var(--T) ease infinite;}
+    @keyframes k-bph{0%,35%{stroke-dashoffset:1;opacity:1}40.5%{stroke-dashoffset:0;opacity:1}95%{stroke-dashoffset:0;opacity:1}98%{stroke-dashoffset:0;opacity:0}99%{stroke-dashoffset:1;opacity:0}100%{stroke-dashoffset:1;opacity:1}}
+    .bph{animation:k-bph var(--T) ease-in-out infinite;}
+    @keyframes k-bphh{0%,40%{opacity:0}41%{opacity:1}95%{opacity:1}98%,100%{opacity:0}}
+    .bphh{animation:k-bphh var(--T) ease infinite;}
+    @keyframes k-zoomB{0%,49%{opacity:0}52%{opacity:1}95%{opacity:1}98%,100%{opacity:0}}
+    .zoomB{animation:k-zoomB var(--T) ease infinite;}
+    @keyframes k-cloud{0%,55.5%{opacity:1}58.5%,97.5%{opacity:0}100%{opacity:1}}
+    .cloud{animation:k-cloud var(--T) ease infinite;}
+    @keyframes k-pflash{0%,55%{opacity:0}56.5%{opacity:1}60%,100%{opacity:0}}
+    .pflash{animation:k-pflash var(--T) ease infinite;}
+    @keyframes k-cp{0%,56.5%{opacity:1}58%,97.5%{opacity:0}100%{opacity:1}}
+    .cp{animation:k-cp var(--T) ease infinite;}
+    @keyframes k-qpL{0%,56.5%{transform:translate(74px,0px);opacity:0}58%{transform:translate(69.56px,0px);opacity:1}64%,95%{transform:translate(0px,0px);opacity:1}97%{transform:translate(0px,0px);opacity:0}98%,100%{transform:translate(74px,0px);opacity:0}}
+    .qpL{animation:k-qpL var(--T) ease-out infinite;}
+    @keyframes k-qpR{0%,56.5%{transform:translate(-81px,0px);opacity:0}58%{transform:translate(-76.14px,0px);opacity:1}64%,95%{transform:translate(0px,0px);opacity:1}97%{transform:translate(0px,0px);opacity:0}98%,100%{transform:translate(-81px,0px);opacity:0}}
+    .qpR{animation:k-qpR var(--T) ease-out infinite;}
+    @keyframes k-qarr{0%,57.5%{stroke-dashoffset:1;opacity:1}64%{stroke-dashoffset:0;opacity:1}95%{stroke-dashoffset:0;opacity:1}98%{stroke-dashoffset:0;opacity:0}99%{stroke-dashoffset:1;opacity:0}100%{stroke-dashoffset:1;opacity:1}}
+    .qarr{animation:k-qarr var(--T) ease-out infinite;}
+    @keyframes k-qarrh{0%,62.5%{opacity:0}64%{opacity:1}95%{opacity:1}98%,100%{opacity:0}}
+    .qarrh{animation:k-qarrh var(--T) ease infinite;}
+    @keyframes k-tail{0%,63.5%{opacity:0}66.5%{opacity:1}95%{opacity:1}98%,100%{opacity:0}}
+    .tail{animation:k-tail var(--T) ease infinite;}
+    @keyframes k-cph{0%,52%{stroke-dashoffset:1;opacity:1}55.5%{stroke-dashoffset:0;opacity:1}95%{stroke-dashoffset:0;opacity:1}98%{stroke-dashoffset:0;opacity:0}99%{stroke-dashoffset:1;opacity:0}100%{stroke-dashoffset:1;opacity:1}}
+    .cph{animation:k-cph var(--T) ease-in-out infinite;}
+    @keyframes k-cphh{0%,55%{opacity:0}56%{opacity:1}95%{opacity:1}98%,100%{opacity:0}}
+    .cphh{animation:k-cphh var(--T) ease infinite;}
+    @keyframes k-qpl{0%,60%{opacity:0}62.5%,95%{opacity:1}98%,100%{opacity:0}}
+    .qpl{animation:k-qpl var(--T) ease infinite;}
+    @keyframes k-cpl{0%,56%{opacity:1}58.5%,97.5%{opacity:0}100%{opacity:1}}
+    .cpl{animation:k-cpl var(--T) ease infinite;}
+    @keyframes k-ev{0%,69%{opacity:1}72.5%,96%{opacity:0.18}99%,100%{opacity:1}}
+    .ev{animation:k-ev var(--T) ease infinite;}
+    @keyframes k-od{0%,69%{opacity:0.18}72.5%,96%{opacity:1}99%,100%{opacity:0.18}}
+    .od{animation:k-od var(--T) ease infinite;}
+    @keyframes k-darr{0%,68%{stroke-dashoffset:1;opacity:1}72%{stroke-dashoffset:0;opacity:1}95%{stroke-dashoffset:0;opacity:1}98%{stroke-dashoffset:0;opacity:0}99%{stroke-dashoffset:1;opacity:0}100%{stroke-dashoffset:1;opacity:1}}
+    .darr{animation:k-darr var(--T) ease-in-out infinite;}
+    @keyframes k-darrh{0%,71.5%{opacity:0}72.5%{opacity:1}95%{opacity:1}98%,100%{opacity:0}}
+    .darrh{animation:k-darrh var(--T) ease infinite;}
+    @keyframes k-probe{0%,69.5%{transform:translate(0px,0px)}72.5%,96%{transform:translate(0px,-173.5px)}99%,100%{transform:translate(0px,0px)}}
+    .probe{animation:k-probe var(--T) ease-in-out infinite;}
+    @keyframes k-lbl-gp{0%,4%{opacity:0}6%,95%{opacity:1}98%,100%{opacity:0}}
+    .lbl-gp{animation:k-lbl-gp var(--T) ease infinite;}
+    @keyframes k-lbl-ga{0%,13%{opacity:0}15%,95%{opacity:1}98%,100%{opacity:0}}
+    .lbl-ga{animation:k-lbl-ga var(--T) ease infinite;}
+    @keyframes k-lbl-gb{0%,35%{opacity:0}37%,95%{opacity:1}98%,100%{opacity:0}}
+    .lbl-gb{animation:k-lbl-gb var(--T) ease infinite;}
+    @keyframes k-lbl-gc{0%,52%{opacity:0}54%,95%{opacity:1}98%,100%{opacity:0}}
+    .lbl-gc{animation:k-lbl-gc var(--T) ease infinite;}
+    @keyframes k-lbl-ng{0%,62%{opacity:0}65%,95%{opacity:1}98%,100%{opacity:0}}
+    .lbl-ng{animation:k-lbl-ng var(--T) ease infinite;}
+    @keyframes k-lbl-darr{0%,69%{opacity:0}72%,95%{opacity:1}98%,100%{opacity:0}}
+    .lbl-darr{animation:k-lbl-darr var(--T) ease infinite;}
+    @keyframes k-lbl-even{0%,69%{opacity:1}72.5%,96%{opacity:0.4}99%,100%{opacity:1}}
+    .lbl-even{animation:k-lbl-even var(--T) ease infinite;}
+    @keyframes k-lbl-odd{0%,69%{opacity:0.4}72.5%,96%{opacity:1}99%,100%{opacity:0.4}}
+    .lbl-odd{animation:k-lbl-odd var(--T) ease infinite;}
+    @keyframes k-hng{0%,69%{background-color:rgba(214,39,40,0)}71%,80%{background-color:rgba(214,39,40,0.16)}86%,100%{background-color:rgba(214,39,40,0)}}
+    .hng{animation:k-hng var(--T) ease infinite;}
+    @keyframes k-st0{0%,2%{opacity:0}3%,22%{opacity:1}23%,100%{opacity:0}}
+    .st0{animation:k-st0 var(--T) ease infinite;}
+    @keyframes k-st1{0%,22%{opacity:0}23%,39%{opacity:1}40%,100%{opacity:0}}
+    .st1{animation:k-st1 var(--T) ease infinite;}
+    @keyframes k-st2{0%,39%{opacity:0}40%,51%{opacity:1}52%,100%{opacity:0}}
+    .st2{animation:k-st2 var(--T) ease infinite;}
+    @keyframes k-st3{0%,51%{opacity:0}52%,67%{opacity:1}68%,100%{opacity:0}}
+    .st3{animation:k-st3 var(--T) ease infinite;}
+    @keyframes k-st4{0%,67%{opacity:0}68%,95%{opacity:1}96%,100%{opacity:0}}
+    .st4{animation:k-st4 var(--T) ease infinite;}
+  </style>
+</head>
+<body>
+
+<div class="stage" id="stage">
+  <div class="scene s4" id="scene" role="img"
+       aria-label="Animation of the QuTHERA detection chain in five steps. 1, conversion: a dark photon converts at a gold-plated copper hemisphere into a terahertz photon. 2, focusing: the photons converge on the center of the dish, where a silicon lens couples them onto the qubit chip. 3, absorption: the qubit island acts as an antenna and delivers the photon to the Josephson junction. 4, pair breaking: the photon breaks a Cooper pair, leaving one quasiparticle on each side of the junction. 5, parity flip: the island charge changes by one electron, which shifts the qubit resonance and is detected in the transmission of a microwave probe tone."
+       style="width: 1280px; height: 720px; overflow: hidden; background: #ffffff; color: #161616; font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif">
+<svg width="1280" height="720" viewBox="0 0 1280 720" style="position: absolute; left: 0px; top: 0px"><g transform="translate(17.67 67.34) scale(0.633)"><rect x="31" y="79" width="628" height="627" style="fill:#D6BB69;stroke:#161616;stroke-width:3"></rect>
+<rect x="47.5" y="97.5" width="595" height="592" rx="25" style="fill:#ffffff;stroke:#161616;stroke-width:3"></rect>
+<rect x="255" y="462" width="27" height="33" style="fill:#D6BB69;stroke:#161616;stroke-width:3"></rect>
+<rect x="395" y="462" width="25" height="33" style="fill:#D6BB69;stroke:#161616;stroke-width:3"></rect>
+<path d="M75 264.5 L132 264.5 L132 295 A206.9 206.9 0 0 0 542 295 L542 264.5 L600 264.5 L600 295 L553.65 295 A218.5 218.5 0 0 1 120.15 295 L75 295 Z" style="fill:#D6BB69;stroke:#161616;stroke-width:3;stroke-linejoin:round"></path>
+<line x1="336.9" y1="474.3" x2="336.9" y2="485.9" style="stroke:#161616;stroke-width:2"></line>
+<polygon points="208.5,255.6 208.5,232.5 261.5,232.5 261.5,217.5 417.5,217.5 417.5,232.5 466.5,232.5 466.5,255.6" style="fill:#A2DFC2;stroke:#161616;stroke-width:2.5;stroke-linejoin:round"></polygon>
+<rect x="272.5" y="229" width="132.5" height="26.6" style="fill:#ffffff;stroke:#161616;stroke-width:2"></rect>
+<line x1="338.5" y1="217.5" x2="338.5" y2="229" style="stroke:#161616;stroke-width:2"></line>
+<rect x="75" y="255.6" width="525" height="8.9" style="fill:#A8A8A8;stroke:#161616;stroke-width:2.5"></rect>
+<rect x="218" y="244.6" width="7" height="11" style="fill:#A8A8A8;stroke:#161616;stroke-width:1.5"></rect>
+<rect x="232" y="244.6" width="7" height="11" style="fill:#A8A8A8;stroke:#161616;stroke-width:1.5"></rect>
+<rect x="246" y="244.6" width="7" height="11" style="fill:#A8A8A8;stroke:#161616;stroke-width:1.5"></rect>
+<rect x="423" y="244.6" width="7" height="11" style="fill:#A8A8A8;stroke:#161616;stroke-width:1.5"></rect>
+<rect x="437" y="244.6" width="7" height="11" style="fill:#A8A8A8;stroke:#161616;stroke-width:1.5"></rect>
+<rect x="451" y="244.6" width="7" height="11" style="fill:#A8A8A8;stroke:#161616;stroke-width:1.5"></rect>
+<rect x="84" y="264.5" width="7" height="12" style="fill:#A8A8A8;stroke:#161616;stroke-width:1.5"></rect>
+<rect x="99" y="264.5" width="7" height="12" style="fill:#A8A8A8;stroke:#161616;stroke-width:1.5"></rect>
+<rect x="114" y="264.5" width="7" height="12" style="fill:#A8A8A8;stroke:#161616;stroke-width:1.5"></rect>
+<rect x="556" y="264.5" width="7" height="12" style="fill:#A8A8A8;stroke:#161616;stroke-width:1.5"></rect>
+<rect x="571" y="264.5" width="7" height="12" style="fill:#A8A8A8;stroke:#161616;stroke-width:1.5"></rect>
+<rect x="586" y="264.5" width="7" height="12" style="fill:#A8A8A8;stroke:#161616;stroke-width:1.5"></rect>
+<defs><clipPath id="lensClip"><path d="M311.71 255.6 A28.8 28.8 0 1 0 363.89 255.6 Z"></path></clipPath><linearGradient id="gUp" gradientUnits="userSpaceOnUse" x1="1062" y1="0" x2="1223" y2="0"><stop offset="0" style="stop-color:#2E55C8"></stop><stop offset="0.30" style="stop-color:#DCE5F7"></stop><stop offset="0.453" style="stop-color:#FFFFFF"></stop><stop offset="0.62" style="stop-color:#F8DCCF"></stop><stop offset="1" style="stop-color:#E8561D"></stop></linearGradient><linearGradient id="gDn" gradientUnits="userSpaceOnUse" x1="1062" y1="0" x2="1223" y2="0"><stop offset="0" style="stop-color:#E8561D"></stop><stop offset="0.30" style="stop-color:#F8DCCF"></stop><stop offset="0.453" style="stop-color:#FFFFFF"></stop><stop offset="0.62" style="stop-color:#DCE5F7"></stop><stop offset="1" style="stop-color:#2E55C8"></stop></linearGradient></defs>
+<path d="M311.71 255.6 A28.8 28.8 0 1 0 363.89 255.6 Z" style="fill:#9BBED8;stroke:#161616;stroke-width:2.5"></path>
+<g style="clip-path:url(#lensClip)"><rect x="305" y="255.6" width="66" height="8.9" style="fill:#7DA0BA"></rect></g>
+<path d="M311.71 255.6 A28.8 28.8 0 1 0 363.89 255.6 Z" style="fill:none;stroke:#161616;stroke-width:2.5"></path>
+<rect x="317" y="250.3" width="42" height="5.3" style="fill:#344A60;stroke:#161616;stroke-width:1"></rect>
+<rect x="284" y="79" width="25" height="40" style="fill:#161616"></rect>
+<line x1="296.5" y1="119" x2="296.5" y2="180" style="stroke:#161616;stroke-width:2.5"></line>
+<rect x="284" y="180" width="25" height="49" style="fill:#161616"></rect>
+<line x1="296.5" y1="229" x2="296.5" y2="250" style="stroke:#161616;stroke-width:2"></line>
+<rect x="367.5" y="79" width="25" height="40" style="fill:#161616"></rect>
+<line x1="380" y1="119" x2="380" y2="180" style="stroke:#161616;stroke-width:2.5"></line>
+<rect x="367.5" y="180" width="25" height="49" style="fill:#161616"></rect>
+<line x1="380" y1="229" x2="380" y2="250" style="stroke:#161616;stroke-width:2"></line>
+<line x1="144" y1="513" x2="532" y2="513" style="stroke:#161616;stroke-width:3"></line>
+<polygon points="543,513 529,519.5 529,506.5" style="fill:#161616"></polygon>
+<polygon points="133,513 147,506.5 147,519.5" style="fill:#161616"></polygon>
+<rect x="70" y="590" width="36" height="14" style="fill:#D6BB69;stroke:#161616;stroke-width:1.5"></rect>
+<rect x="70" y="618" width="36" height="14" style="fill:#A8A8A8;stroke:#161616;stroke-width:1.5"></rect>
+<rect x="70" y="646" width="36" height="14" style="fill:#9BBED8;stroke:#161616;stroke-width:1.5"></rect>
+<rect x="380" y="590" width="36" height="14" style="fill:#A2DFC2;stroke:#161616;stroke-width:1.5"></rect>
+<rect x="380" y="618" width="36" height="14" style="fill:#344A60;stroke:#161616;stroke-width:1.5"></rect>
+<line class="gp" x1="10" y1="389.01" x2="155.51" y2="389.01" pathLength="1" style="stroke:#161616;stroke-width:3.5;stroke-linecap:butt;stroke-dasharray:1;stroke-dashoffset:1"></line>
+<polygon class="gph" points="169.51,389.01 152.51,397.01 152.51,381.01" style="fill:#161616"></polygon>
+<g class="ram"><line x1="125.43" y1="328.34" x2="213.6" y2="449.69" style="stroke:#161616;stroke-width:2.5;stroke-dasharray:3 4"></line><path d="M182.46 379.61 A16 16 0 0 1 178.92 401.96" style="fill:none;stroke:#161616;stroke-width:2.5"></path><circle cx="177.42" cy="390.26" r="2.4" style="fill:#161616"></circle></g>
+<circle class="bflash" cx="169.51" cy="389.01" r="12" style="fill:rgba(214,39,40,0.55);filter:drop-shadow(0 0 5px rgba(214,39,40,0.85))"></circle>
+<line class="ray" x1="171.94" y1="387.25" x2="301.28" y2="294.1" pathLength="1" style="stroke:#D62728;stroke-width:4;stroke-linecap:butt;stroke-dasharray:1;stroke-dashoffset:1"></line>
+<polygon class="rayh" points="311.83,286.5 302.94,301.53 294.76,290.17" style="fill:#D62728"></polygon>
+<circle class="pul0" cx="171.94" cy="387.25" r="6" style="fill:#D62728;filter:drop-shadow(0 0 5px rgba(214,39,40,0.85))"></circle>
+<path class="lflash" d="M311.71 255.6 A28.8 28.8 0 1 0 363.89 255.6 Z" style="fill:rgba(214,39,40,0.45);filter:drop-shadow(0 0 5px rgba(214,39,40,0.85))"></path>
+<rect class="cflash" x="317" y="250.3" width="42" height="5.3" style="fill:#D62728;filter:drop-shadow(0 0 5px rgba(214,39,40,0.85))"></rect>
+<g class="zoomA"><circle cx="338.5" cy="257" r="31" style="fill:none;stroke:#161616;stroke-width:2;stroke-dasharray:5 4"></circle><line x1="367" y1="268" x2="777" y2="437" style="stroke:#161616;stroke-width:2;stroke-dasharray:3 5"></line></g>
+<rect x="777" y="79" width="482" height="436" style="fill:#B6E1F9;stroke:#161616;stroke-width:3"></rect>
+<rect x="788" y="93" width="458" height="410" rx="20" style="fill:#ffffff;stroke:#161616;stroke-width:3"></rect>
+<circle cx="1050" cy="295" r="106" style="fill:#B6E1F9"></circle>
+<polygon points="803,108 893,108 857.5,165 857.5,283.7 960,283.7 960,306.3 857.5,306.3 857.5,425 893,482 803,482 838.5,425 838.5,165" style="fill:#B6E1F9"></polygon>
+<path d="M944.6 283.7 A106 106 0 0 1 1155.43 284" style="fill:none;stroke:#161616;stroke-width:1.5"></path><path d="M1155.43 306 A106 106 0 0 1 944.6 306.3" style="fill:none;stroke:#161616;stroke-width:1.5"></path>
+<path d="M944.6 283.7 L857.5 283.7 L857.5 165 L893 108 L803 108 L838.5 165 L838.5 425 L803 482 L893 482 L857.5 425 L857.5 306.3 L944.6 306.3" style="fill:none;stroke:#161616;stroke-width:1.5;stroke-linejoin:round"></path>
+<polygon points="816,115 880,115 850.8,158 850.8,290.5 995,290.5 995,299.5 850.8,299.5 850.8,432 880,475 816,475 845.2,432 845.2,158" style="fill:#ffffff;stroke:#161616;stroke-width:1.2;stroke-linejoin:round"></polygon>
+<rect x="851.6" y="291.2" width="143" height="7.6" style="fill:#FEFAF1"></rect>
+<path d="M985 290.5 A16 35.5 0 0 1 1001 255 L1001 335 A16 35.5 0 0 1 985 299.5 Z" style="fill:#FEFAF1"></path>
+<path d="M985 290.5 A16 35.5 0 0 1 1001 255 L1001 335 A16 35.5 0 0 1 985 299.5" style="fill:none;stroke:#161616;stroke-width:1.5;stroke-linejoin:round"></path>
+<path d="M1012 246 Q1012 239.68 1018 236.21 A66 66 0 1 1 1018 353.79 Q1012 350.32 1012 344 Z" style="fill:#FEFAF1"></path><path d="M1113.08 284 A66 66 0 0 0 1018 236.21 Q1012 239.68 1012 246 L1012 344 Q1012 350.32 1018 353.79 A66 66 0 0 0 1113.08 306" style="fill:none;stroke:#161616;stroke-width:1.5;stroke-linejoin:round"></path>
+<rect x="1062" y="284" width="52.08" height="7.5" style="fill:#B6E1F9"></rect><rect x="1154.43" y="284" width="68.57" height="7.5" style="fill:#B6E1F9"></rect><rect x="1062" y="298.5" width="52.08" height="7.5" style="fill:#B6E1F9"></rect><rect x="1154.43" y="298.5" width="68.57" height="7.5" style="fill:#B6E1F9"></rect><g class="mode"><rect x="1062" y="284" width="52.08" height="7.5" style="fill:url(#gUp)"></rect><rect x="1154.43" y="284" width="68.57" height="7.5" style="fill:url(#gUp)"></rect><rect x="1062" y="298.5" width="52.08" height="7.5" style="fill:url(#gDn)"></rect><rect x="1154.43" y="298.5" width="68.57" height="7.5" style="fill:url(#gDn)"></rect></g><rect x="1112.58" y="291.5" width="43.35" height="7" style="fill:#ffffff"></rect><line x1="1062" y1="284" x2="1113.08" y2="284" style="stroke:#161616;stroke-width:1.0;stroke-linecap:square"></line><line x1="1062" y1="284" x2="1062" y2="291.5" style="stroke:#161616;stroke-width:1.0;stroke-linecap:square"></line><line x1="1062" y1="291.5" x2="1223" y2="291.5" style="stroke:#161616;stroke-width:1.0;stroke-linecap:square"></line><line x1="1062" y1="298.5" x2="1223" y2="298.5" style="stroke:#161616;stroke-width:1.0;stroke-linecap:square"></line><line x1="1062" y1="298.5" x2="1062" y2="306" style="stroke:#161616;stroke-width:1.0;stroke-linecap:square"></line><line x1="1062" y1="306" x2="1113.08" y2="306" style="stroke:#161616;stroke-width:1.0;stroke-linecap:square"></line><line x1="1155.43" y1="284" x2="1223" y2="284" style="stroke:#161616;stroke-width:1.0;stroke-linecap:square"></line><line x1="1223" y1="284" x2="1223" y2="291.5" style="stroke:#161616;stroke-width:1.0;stroke-linecap:square"></line><line x1="1223" y1="298.5" x2="1223" y2="306" style="stroke:#161616;stroke-width:1.0;stroke-linecap:square"></line><line x1="1155.43" y1="306" x2="1223" y2="306" style="stroke:#161616;stroke-width:1.0;stroke-linecap:square"></line><line x1="1113.08" y1="284" x2="1113.08" y2="291.5" style="stroke:#161616;stroke-width:0.8;stroke-dasharray:2 2"></line><line x1="1113.08" y1="298.5" x2="1113.08" y2="306" style="stroke:#161616;stroke-width:0.8;stroke-dasharray:2 2"></line><line x1="1155.43" y1="284" x2="1155.43" y2="291.5" style="stroke:#161616;stroke-width:0.8;stroke-dasharray:2 2"></line><line x1="1155.43" y1="298.5" x2="1155.43" y2="306" style="stroke:#161616;stroke-width:0.8;stroke-dasharray:2 2"></line><line x1="1131.4" y1="291.4" x2="1138.6" y2="298.6" style="stroke:#161616;stroke-width:2.2;stroke-linecap:round"></line><line x1="1131.4" y1="298.6" x2="1138.6" y2="291.4" style="stroke:#161616;stroke-width:2.2;stroke-linecap:round"></line>
+<circle class="jglow" cx="1135" cy="295" r="10" style="fill:rgba(214,39,40,0.45);filter:drop-shadow(0 0 5px rgba(214,39,40,0.85))"></circle>
+<rect x="813" y="215.7" width="71" height="9" style="fill:#FEFAF1;stroke:#161616;stroke-width:1.2"></rect><rect x="836.5" y="216.3" width="24" height="7.8" style="fill:#86C6EE"></rect><rect x="813" y="215.7" width="5" height="9" style="fill:#F9B341;stroke:#161616;stroke-width:1"></rect><rect x="879" y="215.7" width="5" height="9" style="fill:#F9B341;stroke:#161616;stroke-width:1"></rect><rect x="813" y="365.7" width="71" height="9" style="fill:#FEFAF1;stroke:#161616;stroke-width:1.2"></rect><rect x="836.5" y="366.3" width="24" height="7.8" style="fill:#86C6EE"></rect><rect x="813" y="365.7" width="5" height="9" style="fill:#F9B341;stroke:#161616;stroke-width:1"></rect><rect x="879" y="365.7" width="5" height="9" style="fill:#F9B341;stroke:#161616;stroke-width:1"></rect><rect x="867.4" y="259.4" width="10.6" height="75" style="fill:#FEFAF1;stroke:#161616;stroke-width:1.2"></rect><rect x="868" y="280.5" width="9.4" height="29" style="fill:#86C6EE"></rect><rect x="867.4" y="259.4" width="10.6" height="5" style="fill:#F9B341;stroke:#161616;stroke-width:1"></rect><rect x="867.4" y="329.4" width="10.6" height="5" style="fill:#F9B341;stroke:#161616;stroke-width:1"></rect><rect x="911.6" y="259.4" width="10.6" height="75" style="fill:#FEFAF1;stroke:#161616;stroke-width:1.2"></rect><rect x="912.2" y="280.5" width="9.4" height="29" style="fill:#86C6EE"></rect><rect x="911.6" y="259.4" width="10.6" height="5" style="fill:#F9B341;stroke:#161616;stroke-width:1"></rect><rect x="911.6" y="329.4" width="10.6" height="5" style="fill:#F9B341;stroke:#161616;stroke-width:1"></rect>
+<line x1="848" y1="20" x2="848" y2="107" style="stroke:#2CA02C;stroke-width:3.5;stroke-linecap:butt;"></line>
+<polygon points="848,120 840,104 856,104" style="fill:#2CA02C"></polygon>
+<line class="bph" x1="945" y1="130" x2="1057.98" y2="240.22" pathLength="1" style="stroke:#D62728;stroke-width:4;stroke-linecap:butt;stroke-dasharray:1;stroke-dashoffset:1"></line>
+<polygon class="bphh" points="1068,250 1050.25,243.85 1061.42,232.4" style="fill:#D62728"></polygon>
+<g class="zoomB"><circle cx="1135" cy="295" r="26" style="fill:none;stroke:#161616;stroke-width:2;stroke-dasharray:5 4"></circle><line x1="1159" y1="285" x2="1360" y2="205" style="stroke:#161616;stroke-width:2;stroke-dasharray:3 5"></line></g>
+<rect x="1360" y="207.5" width="592" height="76.5" style="fill:#B6E1F9"></rect>
+<line x1="1360" y1="207.5" x2="1952" y2="207.5" style="stroke:#161616;stroke-width:3"></line>
+<path d="M1360 117 L1610 117 L1610 176" style="fill:none;stroke:#161616;stroke-width:3"></path>
+<rect x="1610" y="176" width="102" height="31.5" style="fill:#A8A8A8;stroke:#161616;stroke-width:2.5"></rect>
+<polygon points="1700,169 1700,139 1755,139 1755,159 1837.5,159 1837.5,207.5 1720,207.5 1720,169" style="fill:#A8A8A8;stroke:#161616;stroke-width:2.5;stroke-linejoin:round"></polygon>
+<polygon points="1700,169 1720,169 1720,207.5 1712,207.5 1712,176 1700,176" style="fill:#161616"></polygon>
+<path d="M1837.5 159 L1837.5 117 L1952 117" style="fill:none;stroke:#161616;stroke-width:3"></path>
+<ellipse class="cloud" cx="1716" cy="191" rx="58" ry="12.5" style="fill:rgba(44,160,44,0.24);stroke:#2CA02C;stroke-width:1.8;stroke-dasharray:4 3"></ellipse>
+<ellipse class="pflash" cx="1716" cy="191" rx="40" ry="16" style="fill:rgba(214,39,40,0.35);filter:drop-shadow(0 0 5px rgba(214,39,40,0.85))"></ellipse>
+<g class="cp"><circle cx="1702" cy="191" r="8.5" style="fill:#2CA02C;stroke:#161616;stroke-width:2.5"></circle><circle cx="1731" cy="191" r="8.5" style="fill:#2CA02C;stroke:#161616;stroke-width:2.5"></circle></g>
+<circle class="qpL" cx="1628" cy="191" r="8.5" style="fill:#D62728;stroke:#161616;stroke-width:2.5"></circle>
+<circle class="qpR" cx="1812" cy="191" r="8.5" style="fill:#D62728;stroke:#161616;stroke-width:2.5"></circle>
+<line class="qarr" x1="1694" y1="191" x2="1651" y2="191" pathLength="1" style="stroke:#D62728;stroke-width:3.5;stroke-linecap:butt;stroke-dasharray:1;stroke-dashoffset:1"></line>
+<polygon class="qarrh" points="1640,191 1654,184 1654,198" style="fill:#D62728"></polygon>
+<line class="qarr" x1="1739" y1="191" x2="1786" y2="191" pathLength="1" style="stroke:#D62728;stroke-width:3.5;stroke-linecap:butt;stroke-dasharray:1;stroke-dashoffset:1"></line>
+<polygon class="qarrh" points="1797,191 1783,198 1783,184" style="fill:#D62728"></polygon>
+<g class="tail"><path d="M1617 191 q-5.5 -5 -11 0 t-11 0 t-11 0" style="fill:none;stroke:#161616;stroke-width:2.5"></path><polygon points="1571,191 1585,184 1585,198" style="fill:#161616"></polygon><path d="M1824 191 q5.5 -5 11 0 t11 0 t11 0" style="fill:none;stroke:#161616;stroke-width:2.5"></path><polygon points="1870,191 1856,198 1856,184" style="fill:#161616"></polygon></g>
+<line class="cph" x1="1686" y1="58" x2="1707.47" y2="120.75" pathLength="1" style="stroke:#D62728;stroke-width:4;stroke-linecap:butt;stroke-dasharray:1;stroke-dashoffset:1"></line>
+<polygon class="cphh" points="1712,134 1698.93,120.5 1714.07,115.33" style="fill:#D62728"></polygon>
+<line class="qpl" x1="1548" y1="101" x2="1622" y2="183" style="stroke:#161616;stroke-width:1.8"></line>
+<line x1="1664" y1="226" x2="1712" y2="209" style="stroke:#161616;stroke-width:1.8"></line>
+<line class="cpl" x1="1800" y1="225" x2="1760" y2="200" style="stroke:#161616;stroke-width:1.8"></line>
+<line x1="1362.5" y1="690" x2="1362.5" y2="390.5" style="stroke:#161616;stroke-width:3.5;stroke-linecap:butt;"></line>
+<polygon points="1362.5,377.5 1370.5,393.5 1354.5,393.5" style="fill:#161616"></polygon>
+<line x1="1362.5" y1="690" x2="1937" y2="690" style="stroke:#161616;stroke-width:3.5;stroke-linecap:butt;"></line>
+<polygon points="1950,690 1934,698 1934,682" style="fill:#161616"></polygon>
+<line x1="1569" y1="372" x2="1569" y2="662" style="stroke:#161616;stroke-width:2;stroke-dasharray:2 4"></line>
+<line x1="1764" y1="372" x2="1764" y2="662" style="stroke:#161616;stroke-width:2;stroke-dasharray:2 4"></line>
+<path class="ev" d="M1368,478.87 L1370,478.94 L1372,479.02 L1374,479.1 L1376,479.19 L1378,479.27 L1380,479.36 L1382,479.45 L1384,479.55 L1386,479.65 L1388,479.75 L1390,479.85 L1392,479.96 L1394,480.07 L1396,480.18 L1398,480.3 L1400,480.42 L1402,480.55 L1404,480.68 L1406,480.82 L1408,480.96 L1410,481.1 L1412,481.25 L1414,481.41 L1416,481.57 L1418,481.74 L1420,481.92 L1422,482.1 L1424,482.29 L1426,482.48 L1428,482.69 L1430,482.9 L1432,483.12 L1434,483.35 L1436,483.59 L1438,483.85 L1440,484.11 L1442,484.38 L1444,484.67 L1446,484.97 L1448,485.28 L1450,485.61 L1452,485.95 L1454,486.31 L1456,486.69 L1458,487.08 L1460,487.5 L1462,487.94 L1464,488.4 L1466,488.88 L1468,489.39 L1470,489.93 L1472,490.5 L1474,491.1 L1476,491.73 L1478,492.4 L1480,493.11 L1482,493.86 L1484,494.66 L1486,495.51 L1488,496.41 L1490,497.37 L1492,498.39 L1494,499.48 L1496,500.65 L1498,501.89 L1500,503.22 L1502,504.64 L1504,506.17 L1506,507.81 L1508,509.57 L1510,511.46 L1512,513.5 L1514,515.7 L1516,518.07 L1518,520.63 L1520,523.39 L1522,526.38 L1524,529.62 L1526,533.11 L1528,536.89 L1530,540.99 L1532,545.41 L1534,550.18 L1536,555.32 L1538,560.84 L1540,566.76 L1542,573.07 L1544,579.75 L1546,586.79 L1548,594.13 L1550,601.69 L1552,609.36 L1554,617 L1556,624.44 L1558,631.46 L1560,637.84 L1562,643.34 L1564,647.7 L1566,650.74 L1568,652.3 L1570,652.3 L1572,650.74 L1574,647.7 L1576,643.34 L1578,637.84 L1580,631.46 L1582,624.44 L1584,617 L1586,609.36 L1588,601.69 L1590,594.13 L1592,586.79 L1594,579.75 L1596,573.07 L1598,566.76 L1600,560.84 L1602,555.32 L1604,550.18 L1606,545.41 L1608,540.99 L1610,536.89 L1612,533.11 L1614,529.62 L1616,526.38 L1618,523.39 L1620,520.63 L1622,518.07 L1624,515.7 L1626,513.5 L1628,511.46 L1630,509.57 L1632,507.81 L1634,506.17 L1636,504.64 L1638,503.22 L1640,501.89 L1642,500.65 L1644,499.48 L1646,498.39 L1648,497.37 L1650,496.41 L1652,495.51 L1654,494.66 L1656,493.86 L1658,493.11 L1660,492.4 L1662,491.73 L1664,491.1 L1666,490.5 L1668,489.93 L1670,489.39 L1672,488.88 L1674,488.4 L1676,487.94 L1678,487.5 L1680,487.08 L1682,486.69 L1684,486.31 L1686,485.95 L1688,485.61 L1690,485.28 L1692,484.97 L1694,484.67 L1696,484.38 L1698,484.11 L1700,483.85 L1702,483.59 L1704,483.35 L1706,483.12 L1708,482.9 L1710,482.69 L1712,482.48 L1714,482.29 L1716,482.1 L1718,481.92 L1720,481.74 L1722,481.57 L1724,481.41 L1726,481.25 L1728,481.1 L1730,480.96 L1732,480.82 L1734,480.68 L1736,480.55 L1738,480.42 L1740,480.3 L1742,480.18 L1744,480.07 L1746,479.96 L1748,479.85 L1750,479.75 L1752,479.65 L1754,479.55 L1756,479.45 L1758,479.36 L1760,479.27 L1762,479.19 L1764,479.1 L1766,479.02 L1768,478.94 L1770,478.87 L1772,478.79 L1774,478.72 L1776,478.65 L1778,478.58 L1780,478.52 L1782,478.45 L1784,478.39 L1786,478.33 L1788,478.27 L1790,478.21 L1792,478.16 L1794,478.1 L1796,478.05 L1798,477.99 L1800,477.94 L1802,477.89 L1804,477.85 L1806,477.8 L1808,477.75 L1810,477.71 L1812,477.66 L1814,477.62 L1816,477.58 L1818,477.54 L1820,477.5 L1822,477.46 L1824,477.42 L1826,477.39 L1828,477.35 L1830,477.31 L1832,477.28 L1834,477.25 L1836,477.21 L1838,477.18 L1840,477.15 L1842,477.12 L1844,477.09 L1846,477.06 L1848,477.03 L1850,477 L1852,476.97 L1854,476.95 L1856,476.92 L1858,476.89 L1860,476.87 L1862,476.84 L1864,476.82 L1866,476.79 L1868,476.77 L1870,476.75 L1872,476.72 L1874,476.7 L1876,476.68 L1878,476.66 L1880,476.64 L1882,476.62 L1884,476.6 L1886,476.58 L1888,476.56 L1890,476.54 L1892,476.52 L1894,476.5 L1896,476.48 L1898,476.46 L1900,476.45 L1902,476.43 L1904,476.41 L1906,476.4 L1908,476.38 L1910,476.36 L1912,476.35 L1914,476.33 L1916,476.32 L1918,476.3 L1920,476.29 L1922,476.27 L1924,476.26 L1926,476.24 L1928,476.23 L1930,476.22 L1932,476.2 L1934,476.19 L1936,476.18" style="fill:none;stroke:#2CA02C;stroke-width:4.5;stroke-linejoin:round"></path>
+<path class="od" d="M1368,476.01 L1370,476.02 L1372,476.03 L1374,476.04 L1376,476.05 L1378,476.07 L1380,476.08 L1382,476.09 L1384,476.1 L1386,476.11 L1388,476.12 L1390,476.13 L1392,476.15 L1394,476.16 L1396,476.17 L1398,476.18 L1400,476.2 L1402,476.21 L1404,476.22 L1406,476.24 L1408,476.25 L1410,476.27 L1412,476.28 L1414,476.29 L1416,476.31 L1418,476.32 L1420,476.34 L1422,476.36 L1424,476.37 L1426,476.39 L1428,476.4 L1430,476.42 L1432,476.44 L1434,476.45 L1436,476.47 L1438,476.49 L1440,476.51 L1442,476.53 L1444,476.55 L1446,476.57 L1448,476.59 L1450,476.61 L1452,476.63 L1454,476.65 L1456,476.67 L1458,476.69 L1460,476.71 L1462,476.73 L1464,476.76 L1466,476.78 L1468,476.8 L1470,476.83 L1472,476.85 L1474,476.88 L1476,476.91 L1478,476.93 L1480,476.96 L1482,476.99 L1484,477.01 L1486,477.04 L1488,477.07 L1490,477.1 L1492,477.13 L1494,477.16 L1496,477.2 L1498,477.23 L1500,477.26 L1502,477.3 L1504,477.33 L1506,477.37 L1508,477.4 L1510,477.44 L1512,477.48 L1514,477.52 L1516,477.56 L1518,477.6 L1520,477.64 L1522,477.69 L1524,477.73 L1526,477.78 L1528,477.82 L1530,477.87 L1532,477.92 L1534,477.97 L1536,478.02 L1538,478.07 L1540,478.13 L1542,478.18 L1544,478.24 L1546,478.3 L1548,478.36 L1550,478.42 L1552,478.48 L1554,478.55 L1556,478.62 L1558,478.69 L1560,478.76 L1562,478.83 L1564,478.91 L1566,478.98 L1568,479.06 L1570,479.15 L1572,479.23 L1574,479.32 L1576,479.41 L1578,479.5 L1580,479.6 L1582,479.7 L1584,479.8 L1586,479.9 L1588,480.01 L1590,480.12 L1592,480.24 L1594,480.36 L1596,480.49 L1598,480.61 L1600,480.75 L1602,480.89 L1604,481.03 L1606,481.18 L1608,481.33 L1610,481.49 L1612,481.66 L1614,481.83 L1616,482.01 L1618,482.19 L1620,482.38 L1622,482.58 L1624,482.79 L1626,483.01 L1628,483.24 L1630,483.47 L1632,483.72 L1634,483.97 L1636,484.24 L1638,484.52 L1640,484.82 L1642,485.12 L1644,485.44 L1646,485.78 L1648,486.13 L1650,486.5 L1652,486.88 L1654,487.29 L1656,487.71 L1658,488.16 L1660,488.64 L1662,489.13 L1664,489.66 L1666,490.21 L1668,490.79 L1670,491.41 L1672,492.06 L1674,492.75 L1676,493.48 L1678,494.26 L1680,495.08 L1682,495.95 L1684,496.88 L1686,497.87 L1688,498.93 L1690,500.05 L1692,501.26 L1694,502.54 L1696,503.92 L1698,505.39 L1700,506.98 L1702,508.67 L1704,510.5 L1706,512.46 L1708,514.58 L1710,516.86 L1712,519.33 L1714,521.99 L1716,524.86 L1718,527.97 L1720,531.33 L1722,534.97 L1724,538.9 L1726,543.15 L1728,547.75 L1730,552.7 L1732,558.03 L1734,563.75 L1736,569.86 L1738,576.36 L1740,583.23 L1742,590.43 L1744,597.88 L1746,605.51 L1748,613.19 L1750,620.76 L1752,628.02 L1754,634.75 L1756,640.72 L1758,645.67 L1760,649.4 L1762,651.71 L1764,652.5 L1766,651.71 L1768,649.4 L1770,645.67 L1772,640.72 L1774,634.75 L1776,628.02 L1778,620.76 L1780,613.19 L1782,605.51 L1784,597.88 L1786,590.43 L1788,583.23 L1790,576.36 L1792,569.86 L1794,563.75 L1796,558.03 L1798,552.7 L1800,547.75 L1802,543.15 L1804,538.9 L1806,534.97 L1808,531.33 L1810,527.97 L1812,524.86 L1814,521.99 L1816,519.33 L1818,516.86 L1820,514.58 L1822,512.46 L1824,510.5 L1826,508.67 L1828,506.98 L1830,505.39 L1832,503.92 L1834,502.54 L1836,501.26 L1838,500.05 L1840,498.93 L1842,497.87 L1844,496.88 L1846,495.95 L1848,495.08 L1850,494.26 L1852,493.48 L1854,492.75 L1856,492.06 L1858,491.41 L1860,490.79 L1862,490.21 L1864,489.66 L1866,489.13 L1868,488.64 L1870,488.16 L1872,487.71 L1874,487.29 L1876,486.88 L1878,486.5 L1880,486.13 L1882,485.78 L1884,485.44 L1886,485.12 L1888,484.82 L1890,484.52 L1892,484.24 L1894,483.97 L1896,483.72 L1898,483.47 L1900,483.24 L1902,483.01 L1904,482.79 L1906,482.58 L1908,482.38 L1910,482.19 L1912,482.01 L1914,481.83 L1916,481.66 L1918,481.49 L1920,481.33 L1922,481.18 L1924,481.03 L1926,480.89 L1928,480.75 L1930,480.61 L1932,480.49 L1934,480.36 L1936,480.24" style="fill:none;stroke:#D62728;stroke-width:4.5;stroke-linejoin:round"></path>
+<line x1="1580" y1="448" x2="1753" y2="448" style="stroke:#161616;stroke-width:3"></line>
+<polygon points="1764,448 1750,454.5 1750,441.5" style="fill:#161616"></polygon>
+<polygon points="1569,448 1583,441.5 1583,454.5" style="fill:#161616"></polygon>
+<line x1="1546" y1="563.75" x2="1592" y2="563.75" style="stroke:#161616;stroke-width:2.5"></line>
+<polygon points="1599,563.75 1589,568.75 1589,558.75" style="fill:#161616"></polygon>
+<polygon points="1539,563.75 1549,558.75 1549,568.75" style="fill:#161616"></polygon>
+<line class="darr" x1="1569" y1="578.5" x2="1751" y2="578.5" pathLength="1" style="stroke:#D62728;stroke-width:3.5;stroke-linecap:butt;stroke-dasharray:1;stroke-dashoffset:1"></line>
+<polygon class="darrh" points="1764,578.5 1748,586.5 1748,570.5" style="fill:#D62728"></polygon>
+<circle class="probe" cx="1569" cy="652.5" r="7" style="fill:#ffffff;stroke:#161616;stroke-width:2.5"></circle></g></svg>
+<div style="position: absolute; left: 24px; top: 14px; display: flex; gap: 16px; align-items: baseline">
+<div style="font-size: 27px; font-weight: 700; color: #1C4079">QuTHERA</div>
+<div style="font-size: 15px; color: #4a4a4a">Single-photon detection of dark-photon dark matter with superconducting qubits</div>
+</div>
+<div style="position: absolute; left: 24px; top: 56px; width: 1232px; height: 2px; background: #1C4079"></div>
+<div style="left: 63.25px; position: absolute; top: 135.7px; line-height: 1.18; white-space: nowrap; font-size: 17px; font-weight: 700; color: #161616">T ~ 20 mK</div>
+<div style="left: 274.04px; position: absolute; top: 133.17px; line-height: 1.18; white-space: nowrap; font-size: 16px; font-weight: 700; color: #161616">infrared-<br>tight<br>connectors</div>
+<div class="lbl-gp" style="left: 51.85px; position: absolute; top: 326.87px; line-height: 1.18; white-space: nowrap; font-size: 14px; font-weight: 700; color: #161616">dark<br>photon, γ′</div>
+<div class="lbl-ga" style="left: 175.92px; position: absolute; top: 278.76px; line-height: 1.18; white-space: nowrap; font-size: 16px; font-weight: 700; color: #D62728; text-shadow: 0 0 3px #ffffff, 0 0 3px #ffffff, 0 0 4px #ffffff">photon, γ<br><span style="padding-left: 36px">~THz</span></div>
+<div style="left: 171.62px; width: 120px; text-align: center; position: absolute; top: 397.13px; line-height: 1.18; white-space: nowrap; font-size: 16px; font-weight: 700; color: #161616">~ 8 cm</div>
+<div style="left: 92.36px; position: absolute; top: 439.23px; line-height: 1.18; white-space: nowrap; font-size: 12px; color: #161616">Cu hemisphere, Au-plated</div>
+<div style="left: 92.36px; position: absolute; top: 456.95px; line-height: 1.18; white-space: nowrap; font-size: 12px; color: #161616">lid</div>
+<div style="left: 92.36px; position: absolute; top: 474.68px; line-height: 1.18; white-space: nowrap; font-size: 12px; color: #161616">Si lens</div>
+<div style="left: 288.59px; position: absolute; top: 439.23px; line-height: 1.18; white-space: nowrap; font-size: 12px; color: #161616">cavity</div>
+<div style="left: 288.59px; position: absolute; top: 456.95px; line-height: 1.18; white-space: nowrap; font-size: 12px; color: #161616">qubit chip</div>
+<div style="left: 565.85px; position: absolute; top: 83.8px; line-height: 1.18; white-space: nowrap; font-size: 15px; font-weight: 700; color: #1E7F1E">probe tone, f ~ GHz</div>
+<div style="left: 527.87px; position: absolute; top: 149.63px; line-height: 1.18; white-space: nowrap; font-size: 17px; font-weight: 700; color: #161616">1</div>
+<div style="left: 527.87px; position: absolute; top: 328.14px; line-height: 1.18; white-space: nowrap; font-size: 17px; font-weight: 700; color: #161616">2</div>
+<div class="lbl-gb" style="left: 617.75px; position: absolute; top: 126.84px; line-height: 1.18; white-space: nowrap; font-size: 16px; font-weight: 700; color: #D62728; text-shadow: 0 0 3px #ffffff, 0 0 3px #ffffff, 0 0 4px #ffffff">photon, γ<br><span style="padding-left: 36px">~THz</span></div>
+<div style="left: 653.65px; width: 70px; text-align: center; position: absolute; top: 263.57px; line-height: 1.18; white-space: nowrap; font-size: 12.5px; font-weight: 700; color: #161616">qubit<br>island</div>
+<div style="left: 755.75px; position: absolute; top: 278.76px; line-height: 1.18; white-space: nowrap; font-size: 13px; font-weight: 700; color: #161616">ground<br>plane</div>
+<div style="right: 482.47px; text-align: right; position: absolute; top: 355.99px; line-height: 1.18; white-space: nowrap; font-size: 16px; font-weight: 700; color: #858585">Zoom: qubit chip</div>
+<div style="left: 440.67px; width: 420px; text-align: center; position: absolute; top: 429.42px; line-height: 1.18; white-space: nowrap; font-size: 23px; font-weight: 600; color: #161616">H = 4E<sub>C</sub>(n − <span class="hng" style="color: #D62728; border-radius: 4px; padding: 0px 2px">n<sub>g</sub></span>)² − E<sub>J</sub> cos φ</div>
+<div style="left: 500.67px; width: 300px; text-align: center; position: absolute; top: 471.19px; line-height: 1.18; white-space: nowrap; font-size: 13px; font-weight: 700; color: #D62728">offset charge n<sub>g</sub>, in units of 2e</div>
+<div class="lbl-gc" style="left: 986.16px; position: absolute; top: 73.67px; line-height: 1.18; white-space: nowrap; font-size: 16px; font-weight: 700; color: #D62728">photon, γ<br><span style="padding-left: 36px">~THz</span></div>
+<div class="lbl-ng" style="left: 1120.36px; position: absolute; top: 106.59px; line-height: 1.18; white-space: nowrap; font-size: 16px; font-weight: 700; color: #D62728">n<sub>g</sub> → n<sub>g</sub> + ½</div>
+<div class="qpl" style="left: 882.35px; position: absolute; top: 114.18px; line-height: 1.18; white-space: nowrap; font-size: 16px; font-weight: 700; color: #161616">Quasiparticle</div>
+<div style="left: 882.35px; position: absolute; top: 162.29px; line-height: 1.18; white-space: nowrap; font-size: 16px; font-weight: 700; color: #161616">island</div>
+<div style="right: 27.98px; text-align: right; position: absolute; top: 143.93px; line-height: 1.18; white-space: nowrap; font-size: 16px; font-weight: 700; color: #161616">ground<br>plane</div>
+<div style="left: 882.35px; position: absolute; top: 216.73px; line-height: 1.18; white-space: nowrap; font-size: 16px; font-weight: 700; color: #161616">substrate</div>
+<div style="left: 972.31px; width: 110px; text-align: center; position: absolute; top: 202.17px; line-height: 1.18; white-space: nowrap; font-size: 16px; font-weight: 700; color: #161616">Josephson<br>junction</div>
+<div class="cpl" style="right: 27.98px; text-align: right; position: absolute; top: 202.17px; line-height: 1.18; white-space: nowrap; font-size: 16px; font-weight: 700; color: #161616">Cooper pair<br><span style="font-size: 13px; font-weight: 400">delocalized over ξ</span></div>
+<div style="right: 27.98px; text-align: right; position: absolute; top: 250.91px; line-height: 1.18; white-space: nowrap; font-size: 16px; font-weight: 700; color: #858585">Zoom: Josephson junction</div>
+<div style="position: absolute; left: 740.83px; top: 396px; width: 240px; height: 20px; line-height: 20px; text-align: center; white-space: nowrap; transform: rotate(-90deg); font-size: 15px; font-weight: 700; color: #161616">Transmission, |S<sub>21</sub>|</div>
+<div class="lbl-even" style="position: absolute; left: 954.45px; top: 324.2px; width: 90px; height: 18px; line-height: 18px; text-align: center; white-space: nowrap; transform: rotate(-90deg); font-size: 12.5px; font-weight: 700; color: #161616">even n<sub>g</sub></div>
+<div class="lbl-odd" style="position: absolute; left: 1100.68px; top: 324.2px; width: 90px; height: 18px; line-height: 18px; text-align: center; white-space: nowrap; transform: rotate(-90deg); font-size: 12.5px; font-weight: 700; color: #161616">odd n<sub>g</sub></div>
+<div style="left: 1017.25px; width: 110px; text-align: center; position: absolute; top: 299.02px; line-height: 1.18; white-space: nowrap; font-size: 12px; font-weight: 700; color: #161616">charge<br>dispersion, ε<br>~MHz</div>
+<div style="right: 293.21px; text-align: right; position: absolute; top: 412.33px; line-height: 1.18; white-space: nowrap; font-size: 12px; font-weight: 700; color: #161616">linewidth, κ<br>~MHz</div>
+<div class="lbl-darr" style="left: 1045.66px; position: absolute; top: 439.54px; line-height: 1.18; white-space: nowrap; font-size: 15px; font-weight: 700; color: #D62728">n<sub>g</sub> →<br><span style="padding-left: 18px">n<sub>g</sub> + ½</span></div>
+<div style="right: 27.98px; text-align: right; position: absolute; top: 508.54px; line-height: 1.18; white-space: nowrap; font-size: 15px; font-weight: 700; color: #1E7F1E">Probe frequency, f (GHz)</div>
+<div class="st0" style="position: absolute; left: 24px; top: 560px; width: 1232px; font-size: 16px; line-height: 1.45; color: #1f1f1f"><span style="font-weight: 700; color: #1C4079">Conversion.</span> A dark photon γ′ passes the shielding and converts at the Cu hemisphere into a terahertz photon γ, emitted normal to the surface.</div>
+<div class="st1" style="position: absolute; left: 24px; top: 560px; width: 1232px; font-size: 16px; line-height: 1.45; color: #1f1f1f"><span style="font-weight: 700; color: #1C4079">Focusing.</span> Normal emission from the whole surface converges on the dish centre, where the Si lens couples it onto the qubit chip.</div>
+<div class="st2" style="position: absolute; left: 24px; top: 560px; width: 1232px; font-size: 16px; line-height: 1.45; color: #1f1f1f"><span style="font-weight: 700; color: #1C4079">Absorption.</span> The pier of the qubit island acts as a double-slot antenna and delivers the photon to the Josephson junction.</div>
+<div class="st3" style="position: absolute; left: 24px; top: 560px; width: 1232px; font-size: 16px; line-height: 1.45; color: #1f1f1f"><span style="font-weight: 700; color: #1C4079">Pair breaking.</span> The photon (hν &gt; 2Δ) breaks a Cooper pair delocalized across the junction, leaving one quasiparticle on each side.</div>
+<div class="st4" style="position: absolute; left: 24px; top: 560px; width: 1232px; font-size: 16px; line-height: 1.45; color: #1f1f1f"><span style="font-weight: 700; color: #1C4079">Parity flip.</span> The island charge changes by one electron (n<sub>g</sub> → n<sub>g</sub> + ½), so the resonance jumps by ε and the probe transmission steps up.</div>
+<div style="position: absolute; left: 24px; top: 620px; width: 1232px; height: 3px; background: #e3e7ee; border-radius: 2px"></div>
+<div class="progress" style="position: absolute; left: 24px; top: 620px; width: 1232px; height: 3px; background: #1C4079; border-radius: 2px"></div>
+<div style="position: absolute; left: 24px; top: 634px; width: 236.8px; height: 44px; box-sizing: border-box; border: 1px solid #d5dae3; border-radius: 10px; overflow: hidden">
+<div class="st0" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; border: 1.5px solid #1C4079; border-radius: 10px; background: #eef2f8"></div>
+<div style="position: absolute; left: 14px; top: 12px; display: flex; gap: 10px; align-items: baseline; font-size: 15px"><span style="font-weight: 700; color: #1C4079">1</span><span style="color: #1f1f1f; font-weight: 600">Conversion</span></div>
+</div>
+<div style="position: absolute; left: 272.8px; top: 634px; width: 236.8px; height: 44px; box-sizing: border-box; border: 1px solid #d5dae3; border-radius: 10px; overflow: hidden">
+<div class="st1" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; border: 1.5px solid #1C4079; border-radius: 10px; background: #eef2f8"></div>
+<div style="position: absolute; left: 14px; top: 12px; display: flex; gap: 10px; align-items: baseline; font-size: 15px"><span style="font-weight: 700; color: #1C4079">2</span><span style="color: #1f1f1f; font-weight: 600">Focusing</span></div>
+</div>
+<div style="position: absolute; left: 521.6px; top: 634px; width: 236.8px; height: 44px; box-sizing: border-box; border: 1px solid #d5dae3; border-radius: 10px; overflow: hidden">
+<div class="st2" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; border: 1.5px solid #1C4079; border-radius: 10px; background: #eef2f8"></div>
+<div style="position: absolute; left: 14px; top: 12px; display: flex; gap: 10px; align-items: baseline; font-size: 15px"><span style="font-weight: 700; color: #1C4079">3</span><span style="color: #1f1f1f; font-weight: 600">Absorption</span></div>
+</div>
+<div style="position: absolute; left: 770.4px; top: 634px; width: 236.8px; height: 44px; box-sizing: border-box; border: 1px solid #d5dae3; border-radius: 10px; overflow: hidden">
+<div class="st3" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; border: 1.5px solid #1C4079; border-radius: 10px; background: #eef2f8"></div>
+<div style="position: absolute; left: 14px; top: 12px; display: flex; gap: 10px; align-items: baseline; font-size: 15px"><span style="font-weight: 700; color: #1C4079">4</span><span style="color: #1f1f1f; font-weight: 600">Pair breaking</span></div>
+</div>
+<div style="position: absolute; left: 1019.2px; top: 634px; width: 236.8px; height: 44px; box-sizing: border-box; border: 1px solid #d5dae3; border-radius: 10px; overflow: hidden">
+<div class="st4" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; border: 1.5px solid #1C4079; border-radius: 10px; background: #eef2f8"></div>
+<div style="position: absolute; left: 14px; top: 12px; display: flex; gap: 10px; align-items: baseline; font-size: 15px"><span style="font-weight: 700; color: #1C4079">5</span><span style="color: #1f1f1f; font-weight: 600">Parity flip</span></div>
+</div>
+  </div>
+  <p class="rotate-hint">Turn your phone sideways for a larger view.</p>
+</div>
+
+<div class="controls">
+  <button type="button" id="play">Pause</button>
+  <div class="rates" id="rates" role="group" aria-labelledby="rates-label">
+    <span id="rates-label">Speed</span>
+    <button type="button" class="rate" data-rate="1" aria-pressed="true">1&times;</button>
+    <button type="button" class="rate" data-rate="2" aria-pressed="false">2&times;</button>
+    <button type="button" class="rate" data-rate="4" aria-pressed="false">4&times;</button>
+  </div>
+  <a href="quthera.html" id="back" hidden>QuTHERA project</a>
+</div>
+
+<script>
+  (function () {
+    var W = 1280, H = 720;
+    var stage = document.getElementById('stage');
+    var scene = document.getElementById('scene');
+    var playButton = document.getElementById('play');
+    var rateButtons = document.querySelectorAll('.rate');
+
+    // Scale the fixed-size scene to fit the stage, centred.
+    function fit() {
+      var w = stage.clientWidth, h = stage.clientHeight;
+      var s = Math.min(w / W, h / H);
+      scene.style.transform = 'translate(' + (w - W * s) / 2 + 'px, ' + (h - H * s) / 2 + 'px) scale(' + s + ')';
+    }
+    if (window.ResizeObserver) {
+      new ResizeObserver(fit).observe(stage);
+    } else {
+      window.addEventListener('resize', fit);
+    }
+    fit();
+
+    // Opened on its own rather than embedded: link back to the project page.
+    if (window.self === window.top) {
+      document.body.classList.add('standalone');
+      document.getElementById('back').hidden = false;
+    }
+
+    // All scene animations share one duration and start together, so they stay in sync.
+    var animations = scene.getAnimations ? scene.getAnimations({ subtree: true }) : null;
+    var playing = true;
+
+    function setPlaying(on) {
+      playing = on;
+      if (animations) {
+        animations.forEach(function (a) { if (on) { a.play(); } else { a.pause(); } });
+      } else {
+        scene.classList.toggle('paused', !on);
+      }
+      playButton.textContent = on ? 'Pause' : 'Play';
+    }
+
+    playButton.addEventListener('click', function () {
+      setPlaying(!playing);
+    });
+
+    if (animations) {
+      Array.prototype.forEach.call(rateButtons, function (button) {
+        button.addEventListener('click', function () {
+          var rate = parseFloat(button.getAttribute('data-rate'));
+          animations.forEach(function (a) { a.playbackRate = rate; });
+          Array.prototype.forEach.call(rateButtons, function (b) {
+            b.setAttribute('aria-pressed', String(b === button));
+          });
+        });
+      });
+    } else {
+      document.getElementById('rates').hidden = true;
+    }
+
+    // Reduced motion: start paused on a frame that shows the whole chain.
+    if (animations && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      animations.forEach(function (a) { a.currentTime = 0.9 * a.effect.getComputedTiming().duration; });
+      setPlaying(false);
+    }
+  })();
+</script>
+
+</body>
+</html>
