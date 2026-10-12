@@ -13,19 +13,23 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
 </head>
 <body>
 
 <nav>
   <div class="container">
-    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
+    <a class="brand" href="index.html">Felix Wagner</a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-controls="nav-links" aria-expanded="false" onclick="toggleNav()">
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links" id="nav-links">
       <li><a href="index.html" class="active">Home</a></li>
       <li><a href="research.html">Research</a></li>
       <li class="has-dropdown">
-        <a href="#">Projects ▾</a>
+        <button type="button" class="dropdown-toggle" aria-expanded="false">Projects <span aria-hidden="true">&#9662;</span></button>
         <ul class="dropdown-menu">
           <li><a href="projects/quthera.html">QuTHERA</a></li>
           <li><a href="projects/metsuperq.html">MetSuperQ</a></li>
@@ -51,6 +55,11 @@
       <div class="hero-text">
         <h1>Felix Wagner</h1>
         <p class="subtitle">PostDoc, Superconducting Quantum Bits and Sensors</p>
+        <p class="profile-links">
+          <a href="https://orcid.org/0000-0001-5687-6392" target="_blank">ORCID</a>
+          <a href="https://github.com/fewagner" target="_blank">GitHub</a>
+          <a href="mailto:felix.wagner@phys.ethz.ch">Email</a>
+        </p>
 
         <p>
           Universal quantum computing will accelerate many computational tasks and create new opportunities,
@@ -72,12 +81,12 @@
 
         <p>
           Read more about my <a href="research.html">research</a> and specific
-          <a href="projects/ml4cpd.html">projects</a>, or browse through my
+          <a href="projects/quthera.html">projects</a>, or browse through my
           <a href="publications.html">publications</a>.
         </p>
       </div>
       <div class="hero-portrait">
-        <img src="images/Profile.png" alt="Felix Wagner">
+        <img src="images/Profile.webp" alt="Felix Wagner" width="400" height="657">
       </div>
     </div>
   </div>
@@ -96,11 +105,7 @@
   </div>
 </footer>
 
-<script>
-  function toggleNav() {
-    document.getElementById('nav-links').classList.toggle('open');
-  }
-</script>
+<script src="js/nav.js"></script>
 
 </body>
 </html>

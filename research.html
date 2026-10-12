@@ -8,19 +8,23 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
 </head>
 <body>
 
 <nav>
   <div class="container">
-    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
+    <a class="brand" href="index.html">Felix Wagner</a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-controls="nav-links" aria-expanded="false" onclick="toggleNav()">
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links" id="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="research.html" class="active">Research</a></li>
       <li class="has-dropdown">
-        <a href="#">Projects &#9662;</a>
+        <button type="button" class="dropdown-toggle" aria-expanded="false">Projects <span aria-hidden="true">&#9662;</span></button>
         <ul class="dropdown-menu">
           <li><a href="projects/quthera.html">QuTHERA</a></li>
           <li><a href="projects/metsuperq.html">MetSuperQ</a></li>
@@ -77,11 +81,11 @@
 
       <div class="img-row">
         <figure>
-          <img src="images/qubit_island.jpg" alt="Superconducting qubit island">
+          <img src="images/qubit_island.webp" alt="Superconducting qubit island">
           <figcaption>Superconducting qubit island.</figcaption>
         </figure>
         <figure>
-          <img src="images/junction.png" alt="Josephson junction">
+          <img src="images/junction.webp" alt="Josephson junction">
           <figcaption>Josephson junction.</figcaption>
         </figure>
       </div>
@@ -98,7 +102,7 @@
 
       <div class="figure-block float-left">
         <figure>
-          <img src="images/sketch_QPT.png" alt="Sketch of quasiparticle tunneling">
+          <img src="images/sketch_QPT.webp" alt="Sketch of quasiparticle tunneling">
           <figcaption>Sketch of quasiparticle tunneling across a Josephson junction.</figcaption>
         </figure>
       </div>
@@ -172,11 +176,7 @@
   </div>
 </footer>
 
-<script>
-  function toggleNav() {
-    document.getElementById('nav-links').classList.toggle('open');
-  }
-</script>
+<script src="js/nav.js"></script>
 
 </body>
 </html>

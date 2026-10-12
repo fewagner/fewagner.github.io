@@ -8,19 +8,23 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../favicon.ico" sizes="32x32">
+  <link rel="icon" href="../icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 </head>
 <body>
 
 <nav>
   <div class="container">
-    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
+    <a class="brand" href="../index.html">Felix Wagner</a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-controls="nav-links" aria-expanded="false" onclick="toggleNav()">
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links" id="nav-links">
       <li><a href="../index.html">Home</a></li>
       <li><a href="../research.html">Research</a></li>
       <li class="has-dropdown">
-        <a href="#" class="active">Projects ▾</a>
+        <button type="button" class="dropdown-toggle active" aria-expanded="false">Projects <span aria-hidden="true">&#9662;</span></button>
         <ul class="dropdown-menu">
           <li><a href="quthera.html">QuTHERA</a></li>
           <li><a href="metsuperq.html">MetSuperQ</a></li>
@@ -48,7 +52,7 @@
 
     <div class="img-row">
       <figure>
-        <img src="../images/excess.jpg" alt="EXCESS workshop group picture">
+        <img src="../images/excess.webp" alt="EXCESS workshop group picture">
         <figcaption>EXCESS group picture (2025).</figcaption>
       </figure>
       <figure>
@@ -116,11 +120,7 @@
   </div>
 </footer>
 
-<script>
-  function toggleNav() {
-    document.getElementById('nav-links').classList.toggle('open');
-  }
-</script>
+<script src="../js/nav.js"></script>
 
 </body>
 </html>

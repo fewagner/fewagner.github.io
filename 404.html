@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page Not Found | Felix Wagner</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Served for missing pages at any depth, so all paths are root-absolute -->
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a class="brand" href="/index.html">Felix Wagner</a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-controls="nav-links" aria-expanded="false" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li class="has-dropdown">
+        <button type="button" class="dropdown-toggle" aria-expanded="false">Projects <span aria-hidden="true">&#9662;</span></button>
+        <ul class="dropdown-menu">
+          <li><a href="/projects/quthera.html">QuTHERA</a></li>
+          <li><a href="/projects/metsuperq.html">MetSuperQ</a></li>
+          <li><a href="/projects/cresst.html">CRESST</a></li>
+          <li><a href="/projects/cosinus.html">COSINUS</a></li>
+          <li><a href="/projects/ml4cpd.html">ML4CPD</a></li>
+          <li><a href="/projects/excess.html">EXCESS</a></li>
+          <li><a href="https://github.com/fewagner/quantum101" target="_blank">quantum101</a></li>
+          <li><a href="https://fewagner.com/easy-calculators/" target="_blank">Easy calculators</a></li>
+        </ul>
+      </li>
+      <li><a href="/publications.html">Publications</a></li>
+      <li><a href="/talks.html">Talks</a></li>
+      <li><a href="/teaching.html">Teaching</a></li>
+      <li><a href="/cv.html">CV</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="page-header">
+      <h1>Page Not Found</h1>
+    </div>
+
+    <p>
+      The page you are looking for does not exist or has moved. Try the menu above, or start from the
+      <a href="/index.html">home page</a>.
+    </p>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <span>
+      <a href="mailto:felix.wagner@phys.ethz.ch">felix.wagner@phys.ethz.ch</a>
+      &nbsp;&middot;&nbsp;
+      Quantum Device Lab, ETH Zürich
+      &nbsp;&middot;&nbsp;
+      ETHZ-PSI Quantum Computing Hub
+    </span>
+    <span>Last updated: 10/26</span>
+  </div>
+</footer>
+
+<script src="/js/nav.js"></script>
+
+</body>
+</html>

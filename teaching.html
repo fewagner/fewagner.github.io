@@ -8,19 +8,23 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
 </head>
 <body>
 
 <nav>
   <div class="container">
-    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
+    <a class="brand" href="index.html">Felix Wagner</a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-controls="nav-links" aria-expanded="false" onclick="toggleNav()">
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links" id="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="research.html">Research</a></li>
       <li class="has-dropdown">
-        <a href="#">Projects ▾</a>
+        <button type="button" class="dropdown-toggle" aria-expanded="false">Projects <span aria-hidden="true">&#9662;</span></button>
         <ul class="dropdown-menu">
           <li><a href="projects/quthera.html">QuTHERA</a></li>
           <li><a href="projects/metsuperq.html">MetSuperQ</a></li>
@@ -49,25 +53,61 @@
     <section>
       <h2>Teaching Assistant Positions</h2>
 
-      <h3>Physics 1 for Physicists (2026) — ETH Zurich</h3>
+      <div class="cv-entry">
+        <div class="cv-dates">2026</div>
+        <div class="cv-body">
+          <div class="cv-title">Physics 1 for Physicists</div>
+          <div class="cv-place">ETH Zurich</div>
+        </div>
+      </div>
 
-      <h3>Physics 2 for Electrical Engineering (2026) — ETH Zurich</h3>
+      <div class="cv-entry">
+        <div class="cv-dates">2026</div>
+        <div class="cv-body">
+          <div class="cv-title">Physics 2 for Electrical Engineering</div>
+          <div class="cv-place">ETH Zurich</div>
+        </div>
+      </div>
 
-      <h3>Physics 2 for Material Science (2025) — ETH Zurich</h3>
+      <div class="cv-entry">
+        <div class="cv-dates">2025</div>
+        <div class="cv-body">
+          <div class="cv-title">Physics 2 for Material Science</div>
+          <div class="cv-place">ETH Zurich</div>
+        </div>
+      </div>
 
-      <h3>Quantum Information Processing 2 (2024) — ETH Zurich</h3>
+      <div class="cv-entry">
+        <div class="cv-dates">2024</div>
+        <div class="cv-body">
+          <div class="cv-title">Quantum Information Processing 2</div>
+          <div class="cv-place">ETH Zurich</div>
+        </div>
+      </div>
 
-      <h3>Statistical Methods of Data Analysis (2020–2022) — University of Vienna</h3>
-      <p>
-        I designed and taught the exercise classes on descriptive and inferential (likelihoods, Bayes, …)
-        statistics for physics graduate students.
-      </p>
+      <div class="cv-entry">
+        <div class="cv-dates">2020 – 2022</div>
+        <div class="cv-body">
+          <div class="cv-title">Statistical Methods of Data Analysis</div>
+          <div class="cv-place">University of Vienna</div>
+          <div class="cv-desc">
+            I designed and taught the exercise classes on descriptive and inferential (likelihoods, Bayes, …)
+            statistics for physics graduate students.
+          </div>
+        </div>
+      </div>
 
-      <h3>Electrodynamics I (2018–2019) — TU Vienna</h3>
-      <p>
-        I supervised one of the exercise classes on electrodynamics and special relativity for physics
-        undergraduate students.
-      </p>
+      <div class="cv-entry">
+        <div class="cv-dates">2018 – 2019</div>
+        <div class="cv-body">
+          <div class="cv-title">Electrodynamics I</div>
+          <div class="cv-place">TU Vienna</div>
+          <div class="cv-desc">
+            I supervised one of the exercise classes on electrodynamics and special relativity for physics
+            undergraduate students.
+          </div>
+        </div>
+      </div>
     </section>
 
     <section>
@@ -128,11 +168,7 @@
   </div>
 </footer>
 
-<script>
-  function toggleNav() {
-    document.getElementById('nav-links').classList.toggle('open');
-  }
-</script>
+<script src="js/nav.js"></script>
 
 </body>
 </html>

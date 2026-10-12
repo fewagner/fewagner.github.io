@@ -16,7 +16,7 @@ html {
 
 body {
   font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  color: #555;
+  color: #3f3f3f;
   background: #fff;
   line-height: 1.7;
 }
@@ -60,6 +60,17 @@ nav .container {
   height: 60px;
 }
 
+.brand {
+  color: #1f1f1f;
+  font-size: 1.05rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.brand:hover {
+  color: #2a6ebb;
+  text-decoration: none;
+}
 
 .nav-links {
   list-style: none;
@@ -71,7 +82,8 @@ nav .container {
   position: relative;
 }
 
-.nav-links a {
+.nav-links a,
+.nav-links .dropdown-toggle {
   display: block;
   padding: 0 1rem;
   height: 60px;
@@ -84,13 +96,22 @@ nav .container {
   transition: color 0.2s;
 }
 
+.nav-links .dropdown-toggle {
+  border: none;
+  background: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+
 .nav-links a:hover,
-.nav-links a.active {
+.nav-links a.active,
+.nav-links .dropdown-toggle:hover,
+.nav-links .dropdown-toggle.active {
   color: #2a6ebb;
   text-decoration: none;
 }
 
-/* Dropdown */
+/* Dropdown: toggled by a click, tap or Enter on "Projects" (js/nav.js); mouse hover also opens it */
 .nav-links .dropdown-menu {
   display: none;
   position: absolute;
@@ -106,8 +127,14 @@ nav .container {
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
-.nav-links .has-dropdown:hover .dropdown-menu {
+.nav-links .has-dropdown.open .dropdown-menu {
   display: block;
+}
+
+@media (hover: hover) and (min-width: 901px) {
+  .nav-links .has-dropdown:hover .dropdown-menu {
+    display: block;
+  }
 }
 
 .nav-links .dropdown-menu li a {
@@ -148,7 +175,7 @@ nav .container {
 .page-header h1 {
   font-size: 2rem;
   font-weight: 700;
-  color: #555;
+  color: #1f1f1f;
 }
 
 /* --- Main Content ----------------------------------------- */
@@ -157,10 +184,7 @@ main {
 }
 
 main > .container {
-  background: rgba(255, 255, 255, 0.92);
   padding: 1rem 2rem 2rem;
-  border-radius: 6px;
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
 }
 
 /* --- Home: Hero ------------------------------------------- */
@@ -175,15 +199,24 @@ main > .container {
 .hero-text h1 {
   font-size: 2.4rem;
   font-weight: 700;
-  color: #555;
+  color: #1f1f1f;
   line-height: 1.25;
   margin-bottom: 0.4rem;
 }
 
 .hero-text .subtitle {
   font-size: 1.05rem;
-  color: #888;
+  color: #6b6b6b;
+  margin-bottom: 0.9rem;
+}
+
+.hero-text .profile-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1.25rem;
   margin-bottom: 1.8rem;
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 
 .hero-text p {
@@ -212,7 +245,7 @@ section {
 section h2 {
   font-size: 1.4rem;
   font-weight: 700;
-  color: #555;
+  color: #1f1f1f;
   margin-bottom: 1rem;
   padding-bottom: 0.4rem;
   border-bottom: 2px solid #e8e8e8;
@@ -221,7 +254,7 @@ section h2 {
 section h3 {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #555;
+  color: #1f1f1f;
   margin: 1.5rem 0 0.5rem;
 }
 
@@ -265,7 +298,7 @@ main li {
 
 .figure-block figcaption {
   font-size: 0.8rem;
-  color: #888;
+  color: #6b6b6b;
   margin-top: 0.4rem;
   text-align: center;
 }
@@ -294,7 +327,7 @@ main li {
 
 .img-row figcaption {
   font-size: 0.8rem;
-  color: #888;
+  color: #6b6b6b;
   margin-top: 0.4rem;
   text-align: center;
 }
@@ -325,7 +358,7 @@ main li {
 
 .anim-figure figcaption {
   font-size: 0.8rem;
-  color: #888;
+  color: #6b6b6b;
   margin-top: 0.4rem;
   text-align: center;
 }
@@ -341,7 +374,7 @@ main li {
 
 .pub-entry .pub-title {
   font-weight: 700;
-  color: #555;
+  color: #1f1f1f;
   font-size: 0.975rem;
   margin-bottom: 0.2rem;
 }
@@ -354,7 +387,7 @@ main li {
 
 .pub-entry .pub-journal {
   font-size: 0.875rem;
-  color: #888;
+  color: #6b6b6b;
   font-style: italic;
 }
 
@@ -373,14 +406,14 @@ main li {
 }
 
 .talk-date {
-  color: #888;
+  color: #6b6b6b;
   white-space: nowrap;
   font-size: 0.875rem;
   padding-top: 0.1rem;
 }
 
 .talk-details strong {
-  color: #555;
+  color: #1f1f1f;
   font-weight: 600;
 }
 
@@ -403,7 +436,7 @@ main li {
 .cv-section h2 {
   font-size: 1.2rem;
   font-weight: 700;
-  color: #555;
+  color: #1f1f1f;
   border-bottom: 2px solid #e8e8e8;
   padding-bottom: 0.3rem;
   margin-bottom: 1rem;
@@ -417,14 +450,14 @@ main li {
 }
 
 .cv-dates {
-  color: #888;
+  color: #6b6b6b;
   font-size: 0.875rem;
   padding-top: 0.15rem;
 }
 
 .cv-body .cv-title {
   font-weight: 700;
-  color: #555;
+  color: #1f1f1f;
   font-size: 0.975rem;
 }
 
@@ -444,7 +477,7 @@ footer {
   border-top: 1px solid #e0e0e0;
   padding: 2rem 0;
   font-size: 0.85rem;
-  color: #aaa;
+  color: #767676;
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(8px);
 }
@@ -458,7 +491,7 @@ footer .container {
 }
 
 footer a {
-  color: #888;
+  color: #5c5c5c;
 }
 
 footer a:hover {
@@ -466,6 +499,55 @@ footer a:hover {
 }
 
 /* --- Responsive ------------------------------------------- */
+/* Below 900px the name and the menu no longer fit in one row: collapse the menu */
+@media (max-width: 900px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 1rem 0;
+    z-index: 100;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links a,
+  .nav-links .dropdown-toggle {
+    height: auto;
+    line-height: 1.5;
+    padding: 0.6rem 1.5rem;
+  }
+
+  .nav-links .dropdown-toggle {
+    width: 100%;
+    text-align: left;
+  }
+
+  .nav-links .dropdown-menu {
+    position: static;
+    border: none;
+    background: none;
+    backdrop-filter: none;
+    box-shadow: none;
+    padding-left: 1rem;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  nav .container {
+    position: relative;
+  }
+}
+
 @media (max-width: 700px) {
   .hero {
     grid-template-columns: 1fr;
@@ -479,52 +561,6 @@ footer a:hover {
   .hero-portrait img {
     width: 140px;
     height: auto;
-  }
-
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    right: 0;
-    background: rgba(255, 255, 255, 0.97);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid #e0e0e0;
-    padding: 1rem 0;
-    z-index: 100;
-  }
-
-  .nav-links.open {
-    display: flex;
-  }
-
-  .nav-links a {
-    height: auto;
-    line-height: 1.5;
-    padding: 0.6rem 1.5rem;
-  }
-
-  .nav-links .dropdown-menu {
-    position: static;
-    display: none;
-    border: none;
-    border-top: none;
-    box-shadow: none;
-    padding-left: 1rem;
-  }
-
-  .nav-links .has-dropdown.open .dropdown-menu {
-    display: block;
-  }
-
-  .nav-toggle {
-    display: flex;
-  }
-
-  nav .container {
-    flex-wrap: wrap;
-    position: relative;
   }
 
   .cv-entry {
